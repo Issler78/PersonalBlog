@@ -1,11 +1,5 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IsslerBlog</title>
-</head>
-<body>
+@extends('IsslerBlog.Layouts.IsslerBlogMain')
+
+@section('content')
     <h1>IsslerBlog</h1>
-</body>
-</html>
+@endsection

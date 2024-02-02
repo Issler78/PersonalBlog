@@ -1,0 +1,8 @@
+/* NavBar */
+.nav-item a{
+    display: inline-block;
+}
+.nav-item a:hover {
+    color: #fff;
+    box-shadow: 0 2px #fff;
+}

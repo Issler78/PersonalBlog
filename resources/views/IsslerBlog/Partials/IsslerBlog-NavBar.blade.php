@@ -1,3 +1,12 @@
+<style>
+.nav-item a{
+    display: inline-block;
+}
+.nav-item a:hover {
+    color: #fff;
+    box-shadow: 0 2px #fff;
+}
+</style>
 <nav class="navbar navbar-expand-lg sticky-top navbar-dark bg-dark border-bottom border-body" data-bs-theme="dark">
     <div class="container-fluid">
         <a class="navbar-brand d-flex align-items-center gap-2" href="/IsslerBlog"><img src="https://cdn-icons-png.flaticon.com/512/6930/6930122.png" alt="IsslerBlog Icon" width="30" height="30">IsslerBlog</a>
@@ -19,7 +28,7 @@
                     <a class="nav-link" href="#">Mobile</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Guias</a>
+                    <a class="nav-link" href="#">Guides</a>
                 </li>
             </ul>
             <form class="d-flex">

@@ -4,24 +4,25 @@
 <div class="bg-body-tertiary">
     <div class="container my-5">
         <h1 class="mb-4">Publish New Post</h1>
-        <form action="#" method="POST">
+        <form action="{{ route('IsslerBlog.store') }}" method="POST">
+            @csrf
             <div class="mb-3">
-                <label for="InputTitle" class="form-label">Title:</label>
-                <input type="text" id="InputTitle" class="form-control" placeholder="Example: How to create a Successful Youtube Channel?">
+                <label for="title" class="form-label">Title:</label>
+                <input name="title" type="text" id="title" class="form-control" placeholder="Example: How to create a Successful Youtube Channel?">
             </div>
             <div class="mb-5">
-                <label for="SelectCategory" class="form-label">Category:</label>
-                <select id="SelectCategory" class="form-select">
+                <label for="category" class="form-label">Category:</label>
+                <select name="category" id="category" class="form-select">
                     <option selected>Select the Category of the Post</option>
-                    <option value="#">Front-End</option>
-                    <option value="#">Back-End</option>
-                    <option value="#">Mobile</option>
-                    <option value="#">Guides</option>
+                    <option value="F">Front-End</option>
+                    <option value="B">Back-End</option>
+                    <option value="M">Mobile</option>
+                    <option value="G">Guides</option>
                 </select>
             </div>
             <div class="mb-3">
-                <label for="#" class="form-label">Post Body:</label>
-                <textarea id="PostBody"></textarea>
+                <label for="post_body" class="form-label">Post Body:</label>
+                <textarea name="post_body" id="post_body"></textarea>
                 <hr>
             </div>
             <div class="d-flex justify-content-end gap-3">
@@ -33,7 +34,7 @@
 </div>
 <script>
     tinymce.init({
-        selector: '#PostBody',
+        selector: '#post_body',
         height: 600,
         plugins: [
             'table', 'emoticons', 'help', 'lists', 'preview', 'wordcount', 'charmap', 'visualblocks', 'visualchars', 'link', 'image'

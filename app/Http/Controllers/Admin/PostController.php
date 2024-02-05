@@ -16,4 +16,9 @@ class PostController extends Controller
     {
         return view('IsslerBlog.IsslerBlog-publish');
     }
+
+    public function store(Request $request)
+    {
+        dd($request);
+    }
 }

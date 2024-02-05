@@ -11,4 +11,9 @@ class PostController extends Controller
     {
         return view('IsslerBlog.IsslerBlog-index');
     }
+
+    public function create()
+    {
+        return view('IsslerBlog.IsslerBlog-publish');
+    }
 }

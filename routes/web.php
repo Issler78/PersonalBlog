@@ -18,4 +18,5 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/IsslerBlog', [PostController::class, 'index']);
+Route::get('/IsslerBlog', [PostController::class, 'index'])->name('IsslerBlog.index');
+Route::get('/IsslerBlog/publish', [PostController::class, 'create'])->name('IsslerBlog.publish');

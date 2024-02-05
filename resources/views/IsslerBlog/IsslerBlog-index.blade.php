@@ -9,7 +9,7 @@
 </style>
 <div class="bg-body-tertiary">
     <div class="container my-5">
-        <a href="#" title="Add Post" class="btn btn-lg btn-outline-light mb-3">
+        <a href="{{ route('IsslerBlog.publish') }}" title="Add Post" class="btn btn-md btn-outline-light mb-3">
             <i class="bi bi-plus-lg"></i> Add Post
         </a>
         <div class="row row-cols-1 row-cols-sm-1 row-cols-md-1 g-5">

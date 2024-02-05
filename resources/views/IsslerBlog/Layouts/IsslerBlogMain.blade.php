@@ -15,7 +15,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
-    <link rel="stylesheet" href="{{ asset('css/BlogStyles.css') }}">
+    <!-- TinyMCE -->
+    <script src="https://cdn.tiny.cloud/1/ttdjj2kvv92bij85uwxfwsjad55th677f4e0xobt9rv4yit4/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
 </head>
 <body style="font-family: 'JetBrains Mono', monospace; overflow-x: hidden; background-color: #2B3035;">
     @include('IsslerBlog.Partials.IsslerBlog-NavBar')

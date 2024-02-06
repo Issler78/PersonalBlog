@@ -21,8 +21,8 @@
                 </select>
             </div>
             <div class="mb-3">
-                <label for="post_body" class="form-label">Post Body:</label>
-                <textarea name="post_body" id="post_body"></textarea>
+                <label for="body" class="form-label">Post Body:</label>
+                <textarea name="body" id="body"></textarea>
                 <hr>
             </div>
             <div class="d-flex justify-content-end gap-3">

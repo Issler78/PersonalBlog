@@ -8,7 +8,7 @@
             @csrf
             <div class="mb-3">
                 <label for="title" class="form-label">Title:</label>
-                <input name="title" type="text" id="title" class="form-control" placeholder="Example: How to create a Successful Youtube Channel?">
+                <input name="title" type="text" id="title" class="form-control" placeholder="Example: Guide for future PHP Developers">
             </div>
             <div class="mb-5">
                 <label for="category" class="form-label">Category:</label>

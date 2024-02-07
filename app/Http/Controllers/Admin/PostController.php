@@ -65,4 +65,11 @@ class PostController extends Controller
 
         return redirect()->route('IsslerBlog.index');
     }
+
+    public function destroy(string $id)
+    {
+        $this->model->findOrFail($id)->delete();
+
+        return redirect()->route('IsslerBlog.index');
+    }
 }

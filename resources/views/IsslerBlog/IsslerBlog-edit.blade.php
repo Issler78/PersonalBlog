@@ -3,7 +3,14 @@
 @section('content')
 <div class="bg-body-tertiary">
     <div class="container my-5">
-        <h1 class="mb-4">Edit Post "{{ $post['title'] }}"</h1>
+        <div class="d-flex justify-content-between align-items-center">
+            <h1 class="mb-4">Edit Post "{{ $post['title'] }}"</h1>
+            <form action="{{ route('IsslerBlog.destroy', ['id' => $post['id']]) }}" method="POST">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="btn btn-md btn-outline-danger"><i class="bi bi-trash3"></i> Delete</button>
+            </form>
+        </div>
         <form action="{{ route('IsslerBlog.update', ['id' => $post['id']]) }}" method="POST">
             @csrf
             @method('PUT')

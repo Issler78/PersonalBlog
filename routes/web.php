@@ -23,3 +23,4 @@ Route::get('/IsslerBlog/publish', [PostController::class, 'create'])->name('Issl
 Route::post('/IsslerBlog/publish', [PostController::class, 'store'])->name('IsslerBlog.store');
 Route::get('/IsslerBlog/{id}/edit', [PostController::class, 'edit'])->name('IsslerBlog.edit');
 Route::put('/IsslerBlog/{id}/edit', [PostController::class, 'update'])->name('IsslerBlog.update');
+Route::delete('/IsslerBlog/{id}', [PostController::class, 'destroy'])->name('IsslerBlog.destroy');

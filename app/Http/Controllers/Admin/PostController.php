@@ -39,6 +39,13 @@ class PostController extends Controller
             'body' => $request->body
         ]);
 
-        return route('IsslerBlog.index');
+        return redirect()->route('IsslerBlog.index');
+    }
+
+    public function edit(string $id)
+    {
+        $post = $this->model->all()->find($id);
+
+        return view('IsslerBlog.IsslerBlog-edit', compact('post'));
     }
 }

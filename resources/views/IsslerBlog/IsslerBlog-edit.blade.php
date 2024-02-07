@@ -8,7 +8,7 @@
             <form action="{{ route('IsslerBlog.destroy', ['id' => $post['id']]) }}" method="POST">
                 @csrf
                 @method('DELETE')
-                <button type="submit" class="btn btn-md btn-outline-danger"><i class="bi bi-trash3"></i> Delete</button>
+                <button type="submit" class="btn btn-lg btn-outline-danger ms-4" title="Delete Post" style="padding: 3px 6px;"><i class="bi bi-trash3"></i></button>
             </form>
         </div>
         <form action="{{ route('IsslerBlog.update', ['id' => $post['id']]) }}" method="POST">

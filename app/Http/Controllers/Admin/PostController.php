@@ -42,6 +42,13 @@ class PostController extends Controller
         return redirect()->route('IsslerBlog.index');
     }
 
+    public function show(string $id)
+    {
+        $post = $this->model->all()->find($id);
+
+        return view('IsslerBlog.IsslerBlog-show', compact('post'));
+    }
+
     public function edit(string $id)
     {
         $post = $this->model->all()->find($id);

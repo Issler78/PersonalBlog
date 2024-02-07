@@ -43,11 +43,13 @@
         toolbar: 'undo redo | styles | fontsizeinput bold italic forecolor backcolor | alignleft aligncenter alignright alignjustify outdent indent | bullist numlist | link image | preview',
         statusbar: false,
         entity_encoding: 'raw',
-        skin: "oxide-dark",
-        content_css: "dark",
-        icons: "material",
-        font_size_input_default_unit: "px",
-        indentation: '16px'
-    });
+        skin: 'oxide-dark',
+        content_css: 'dark',
+        icons: 'material',
+        font_size_input_default_unit: 'px',
+        font_family_formats: 'JetBrains Mono ;Andale Mono=andale mono,times; Arial=arial,helvetica,sans-serif; Arial Black=arial black,avant garde; Book Antiqua=book antiqua,palatino; Comic Sans MS=comic sans ms,sans-serif; Courier New=courier new,courier; Georgia=georgia,palatino; Helvetica=helvetica; Impact=impact,chicago; Symbol=symbol; Tahoma=tahoma,arial,helvetica,sans-serif; Terminal=terminal,monaco; Times New Roman=times new roman,times; Trebuchet MS=trebuchet ms,geneva; Verdana=verdana,geneva; Webdings=webdings; Wingdings=wingdings,zapf dingbats',
+        font_size_formats: '16px 18px 20px 22px 24px 26px 28px 30px 32px',
+        content_style: ".mce-content-body {font-size:16px; font-family: 'JetBrains Mono', monospace, Arial, sans-serif;}",
+    })
 </script>
 @endsection

@@ -15,8 +15,8 @@
         <div class="row row-cols-1 row-cols-sm-1 row-cols-md-1 g-5">
             @foreach ($posts as $post)
                 <div class="col">
-                    <a href="#" class="link-light link-underline-opacity-0 link-underline-opacity-100-hover">
-                        <h2>{{ $post['title'] }}</h2>
+                    <a href="{{ route('IsslerBlog.show', ['id' => $post['id']]) }}" class="link-light link-underline-opacity-0 link-underline-opacity-100-hover">
+                        <h2 class="fw-bold">{{ $post['title'] }}</h2>
                     </a>
                     <div class="card shadow-sm">
                         <svg class="bd-placeholder-img card-img-top" width="100%" height="320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
@@ -49,7 +49,7 @@
                             </div>
                                                 
                             <div class="d-flex justify-content-between align-items-center">
-                                <a href="#" title="Read More" class="btn btn-lg btn-outline-light px-5">
+                                <a href="{{ route('IsslerBlog.show', ['id' => $post['id']]) }}" title="Read More" class="btn btn-lg btn-outline-light px-5">
                                     <i class="bi bi-book-half"></i> Read More
                                 </a>
                                 <small class="text-body-secondary fs-6">{{ $post['created_at'] }}</small>

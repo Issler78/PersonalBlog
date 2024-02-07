@@ -15,7 +15,9 @@ class PostController extends Controller
 
     public function index()
     {
-        return view('IsslerBlog.IsslerBlog-index');
+        $posts = $this->model->all();
+
+        return view('IsslerBlog.IsslerBlog-index', compact('posts'));
     }
 
     public function create()
@@ -37,6 +39,6 @@ class PostController extends Controller
             'body' => $request->body
         ]);
 
-        return view('IsslerBlog.IsslerBlog-index');
+        return route('IsslerBlog.index');
     }
 }

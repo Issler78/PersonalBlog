@@ -48,4 +48,21 @@ class PostController extends Controller
 
         return view('IsslerBlog.IsslerBlog-edit', compact('post'));
     }
+
+    public function update(string $id, Request $request)
+    {
+        $request->validate([
+            'title' => 'required|min:3|max:255',
+            'category' => Rule::in('F', 'B', 'M', 'G'),
+            'body' => 'required|min:3'
+        ]);
+
+        $this->model->findOrFail($id)->update([
+            'title' => $request->title,
+            'category' => $request->category,
+            'body' => $request->body 
+        ]);
+
+        return redirect()->route('IsslerBlog.index');
+    }
 }

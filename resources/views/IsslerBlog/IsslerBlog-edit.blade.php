@@ -1,14 +1,12 @@
 @extends('IsslerBlog.Layouts.IsslerBlogMain')
 
 @section('content')
-@extends('IsslerBlog.Layouts.IsslerBlogMain')
-
-@section('content')
 <div class="bg-body-tertiary">
     <div class="container my-5">
         <h1 class="mb-4">Edit Post "{{ $post['title'] }}"</h1>
-        <form action="#">
+        <form action="{{ route('IsslerBlog.update', ['id' => $post['id']]) }}" method="POST">
             @csrf
+            @method('PUT')
             <div class="mb-3">
                 <label for="title" class="form-label">Title:</label>
                 <input name="title" type="text" id="title" class="form-control" value="{{ $post['title'] }}" placeholder="Example: Guide for future PHP Developers">
@@ -53,5 +51,4 @@
         indentation: '16px'
     });
 </script>
-@endsection
 @endsection

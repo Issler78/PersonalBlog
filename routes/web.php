@@ -22,3 +22,4 @@ Route::get('/IsslerBlog', [PostController::class, 'index'])->name('IsslerBlog.in
 Route::get('/IsslerBlog/publish', [PostController::class, 'create'])->name('IsslerBlog.publish');
 Route::post('/IsslerBlog/publish', [PostController::class, 'store'])->name('IsslerBlog.store');
 Route::get('/IsslerBlog/{id}/edit', [PostController::class, 'edit'])->name('IsslerBlog.edit');
+Route::put('/IsslerBlog/{id}/edit', [PostController::class, 'update'])->name('IsslerBlog.update');

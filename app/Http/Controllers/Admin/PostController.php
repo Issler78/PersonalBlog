@@ -28,16 +28,25 @@ class PostController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+            'thumbnail' => 'required|image|mimes:png,jpg,webp',
             'title' => 'required|min:3|max:255',
             'category' => Rule::in('F', 'B', 'M', 'G'),
             'body' => 'required|min:3'
         ]);
 
+        $thumbnail = $request->thumbnail;
+
+        $thumbnailName = md5($thumbnail->getClientOriginalName() . strtotime("now") . "." . $thumbnail->extension());
+
+        $thumbnail->move(public_path('img/posts/thumbnails'), $thumbnailName);
+        
         $this->model->create([
+            'thumbnail' => $thumbnailName,
             'title' => $request->title,
             'category' => $request->category,
             'body' => $request->body
         ]);
+
 
         return redirect()->route('IsslerBlog.index');
     }
@@ -59,12 +68,27 @@ class PostController extends Controller
     public function update(string $id, Request $request)
     {
         $request->validate([
+            'thumbnail' => 'image|mimes:png,jpg,webp',
             'title' => 'required|min:3|max:255',
             'category' => Rule::in('F', 'B', 'M', 'G'),
             'body' => 'required|min:3'
         ]);
 
+        if ($request->hasFile('thumbnail'))
+        {
+            $thumbnail = $request->thumbnail;
+    
+            $thumbnailName = md5($thumbnail->getClientOriginalName() . strtotime("now") . "." . $thumbnail->extension());
+
+            $thumbnail->move(public_path('img/posts/thumbnails'), $thumbnailName);
+        }
+        else
+        {
+            $thumbnailName = $this->model->findOrFail($id)->thumbnail;
+        }
+
         $this->model->findOrFail($id)->update([
+            'thumbnail' => $thumbnailName,
             'title' => $request->title,
             'category' => $request->category,
             'body' => $request->body 

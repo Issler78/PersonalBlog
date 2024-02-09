@@ -19,10 +19,7 @@
                         <h2 class="fw-bold">{{ $post['title'] }}</h2>
                     </a>
                     <div class="card shadow-sm">
-                        <svg class="bd-placeholder-img card-img-top" width="100%" height="320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
-                            <rect width="100%" height="100%" fill="#55595c"></rect>
-                            <text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text>
-                        </svg>
+                        <img src="/img/posts/thumbnails/{{ $post['thumbnail'] }}" alt="Thumbnail" width="100%" height="320">
                         <div class="card-body">
                         <span 
                             class="card-text mb-3 fs-6" 

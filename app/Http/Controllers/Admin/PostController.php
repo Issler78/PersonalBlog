@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 
 class PostController extends Controller
@@ -81,6 +82,7 @@ class PostController extends Controller
             $thumbnailName = md5($thumbnail->getClientOriginalName() . strtotime("now") . "." . $thumbnail->extension());
 
             $thumbnail->move(public_path('img/posts/thumbnails'), $thumbnailName);
+            unlink(public_path('img/posts/thumbnails/' . $this->model->findOrFail($id)->thumbnail));
         }
         else
         {

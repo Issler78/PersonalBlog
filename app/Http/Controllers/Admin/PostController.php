@@ -50,14 +50,14 @@ class PostController extends Controller
 
     public function show(string $id)
     {
-        $post = $this->model->all()->find($id);
+        $post = $this->model->find($id);
 
         return view('IsslerBlog.IsslerBlog-show', compact('post'));
     }
 
     public function edit(string $id)
     {
-        $post = $this->model->all()->find($id);
+        $post = $this->model->find($id);
 
         return view('IsslerBlog.IsslerBlog-edit', compact('post'));
     }

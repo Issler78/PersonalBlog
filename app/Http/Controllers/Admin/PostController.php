@@ -31,11 +31,14 @@ class PostController extends Controller
     {
         $request->validated();
 
-        $thumbnail = $request->thumbnail;
-
-        $thumbnailName = md5($thumbnail->getClientOriginalName() . strtotime("now") . "." . $thumbnail->extension());
-
-        $thumbnail->move(public_path('img/posts/thumbnails'), $thumbnailName);
+        if ($request->hasFile('thumbnail'))
+        {    
+            $thumbnail = $request->thumbnail;
+    
+            $thumbnailName = md5($thumbnail->getClientOriginalName() . strtotime("now") . "." . $thumbnail->extension());
+    
+            $thumbnail->move(public_path('img/posts/thumbnails'), $thumbnailName);
+        }
         
         $this->model->create([
             'thumbnail' => $thumbnailName,

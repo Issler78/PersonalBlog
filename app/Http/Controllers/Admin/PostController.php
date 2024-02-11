@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreUpdatePostRequest;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -26,14 +27,9 @@ class PostController extends Controller
         return view('IsslerBlog.IsslerBlog-publish');
     }
 
-    public function store(Request $request)
+    public function store(StoreUpdatePostRequest $request)
     {
-        $request->validate([
-            'thumbnail' => 'required|image|mimes:png,jpg,webp',
-            'title' => 'required|min:3|max:255',
-            'category' => Rule::in('F', 'B', 'M', 'G'),
-            'body' => 'required|min:3'
-        ]);
+        $request->validated();
 
         $thumbnail = $request->thumbnail;
 
@@ -66,14 +62,9 @@ class PostController extends Controller
         return view('IsslerBlog.IsslerBlog-edit', compact('post'));
     }
 
-    public function update(string $id, Request $request)
+    public function update(string $id, StoreUpdatePostRequest $request)
     {
-        $request->validate([
-            'thumbnail' => 'image|mimes:png,jpg,webp',
-            'title' => 'required|min:3|max:255',
-            'category' => Rule::in('F', 'B', 'M', 'G'),
-            'body' => 'required|min:3'
-        ]);
+        $request->validated();
 
         if ($request->hasFile('thumbnail'))
         {

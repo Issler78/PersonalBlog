@@ -29,8 +29,6 @@ class PostController extends Controller
 
     public function store(StoreUpdatePostRequest $request)
     {
-        $request->validated();
-
         if ($request->hasFile('thumbnail'))
         {    
             $thumbnail = $request->thumbnail;
@@ -46,7 +44,6 @@ class PostController extends Controller
             'category' => $request->category,
             'body' => $request->body
         ]);
-
 
         return redirect()->route('IsslerBlog.index');
     }
@@ -67,8 +64,6 @@ class PostController extends Controller
 
     public function update(string $id, StoreUpdatePostRequest $request)
     {
-        $request->validated();
-
         if ($request->hasFile('thumbnail'))
         {
             $thumbnail = $request->thumbnail;

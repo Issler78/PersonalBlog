@@ -38,24 +38,36 @@
                     <span id="thumbnail-img"></span>
                 </label>
                 <input type="file" name="thumbnail" id="thumbnailInput" class="d-none">
+                @error('thumbnail')
+                    <span class="mt-2 text-danger">{{ $message }}</span>
+                @enderror
             </div>
             <div class="mb-3">
                 <label for="title" class="form-label">Title:</label>
-                <input name="title" type="text" id="title" class="form-control" placeholder="Example: Guide for future PHP Developers">
+                <input name="title" type="text" id="title" class="form-control @error('title') is-invalid @else is-valid @enderror" placeholder="Example: Guide for future PHP Developers" value="{{ old('title') }}">
+                @error('title')
+                    <span class="mt-2 text-danger">{{ $message }}</span>
+                @enderror
             </div>
             <div class="mb-5">
                 <label for="category" class="form-label">Category:</label>
-                <select name="category" id="category" class="form-select">
+                <select name="category" id="category" class="form-select @error('category') is-invalid @else is-valid @enderror">
                     <option selected>Select the Category of the Post</option>
-                    <option value="F">Front-End</option>
-                    <option value="B">Back-End</option>
-                    <option value="M">Mobile</option>
-                    <option value="G">Guides</option>
+                    <option {{ old('category') == "F" ? "selected" : "" }} value="F">Front-End</option>
+                    <option {{ old('category') == "B" ? "selected" : "" }} value="B">Back-End</option>
+                    <option {{ old('category') == "M" ? "selected" : "" }} value="M">Mobile</option>
+                    <option {{ old('category') == "G" ? "selected" : "" }} value="G">Guides</option>
                 </select>
+                @error('category')
+                    <span class="mt-2 text-danger">{{ $message }}</span>
+                @enderror
             </div>
             <div class="mb-3">
                 <label for="body" class="form-label">Post Body:</label>
-                <textarea name="body" id="body"></textarea>
+                <textarea name="body" id="body">{{ old('body') }}</textarea>
+                @error('body')
+                    <span class="mt-2 text-danger">{{ $message }}</span>
+                @enderror
                 <hr>
             </div>
             <div class="d-flex justify-content-end gap-3">

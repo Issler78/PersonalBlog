@@ -90,7 +90,11 @@ class PostController extends Controller
 
     public function destroy(string $id)
     {
-        $this->model->findOrFail($id)->delete();
+        $post = $this->model->findOrFail($id);
+
+        unlink(public_path('/img/posts/thumbnails/' . $post->thumbnail));
+
+        $post->delete();
 
         return redirect()->route('IsslerBlog.index');
     }

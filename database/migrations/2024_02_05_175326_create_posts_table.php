@@ -1,5 +1,6 @@
 <?php
 
+use App\Enum\PostCategory;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -15,7 +16,7 @@ return new class extends Migration
             $table->id();
             $table->string('thumbnail');
             $table->string('title');
-            $table->enum('category', ['F', 'B', 'M', 'G']);
+            $table->enum('category', array_column(PostCategory::cases(), 'name'));
             $table->text('body');
             $table->timestamps();
         });

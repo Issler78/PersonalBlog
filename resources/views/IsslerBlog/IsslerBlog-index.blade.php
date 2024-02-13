@@ -19,7 +19,7 @@
                         <h2 class="fw-bold">{{ $post['title'] }}</h2>
                     </a>
                     <div class="card shadow-sm">
-                        <img src="/img/posts/thumbnails/{{ $post['thumbnail'] }}" alt="Thumbnail" width="100%" height="320">
+                        <img src="/img/posts/thumbnails/{{ $post['thumbnail'] }}" alt="Thumbnail" width="794px" height="400px">
                         <div class="card-body">
                         <span 
                             class="card-text mb-3 fs-6" 

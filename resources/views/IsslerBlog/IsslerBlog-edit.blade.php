@@ -26,6 +26,11 @@
     #thumbnail-img {
         max-width: 100%;
     }
+
+    .thumbnail-img {
+        width: 400px;
+        height: 225px;
+    }
 </style>
 <div class="bg-body-tertiary">
     <div class="container my-5">
@@ -40,42 +45,7 @@
         <form action="{{ route('IsslerBlog.update', ['id' => $post['id']]) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
-            <div class="mb-3 d-flex flex-wrap">
-                <div class="me-lg-3 mb-4">
-                    <label for="thumbnailInput" class="form-label">Thumbnail:</label>
-                    <label class="thumbnail text-secondary" for="thumbnailInput">
-                        <span id="thumbnail-img"></span>
-                    </label>
-                    <input type="file" name="thumbnail" id="thumbnailInput" class="d-none">
-                </div>
-                <div>
-                    <p class="form-label">Current Thumbnail:</p>
-                    <img src="/img/posts/thumbnails/{{ $post['thumbnail'] }}" alt="Current Thumbnail" style="background-size: contain;" width="400" height="225">
-                </div>
-            </div>
-            <div class="mb-3">
-                <label for="title" class="form-label">Title:</label>
-                <input name="title" type="text" id="title" class="form-control" value="{{ $post['title'] }}" placeholder="Example: Guide for future PHP Developers">
-            </div>
-            <div class="mb-5">
-                <label for="category" class="form-label">Category:</label>
-                <select name="category" id="category" class="form-select">
-                    <option selected>Select the Category of the Post</option>
-                    <option value="F" @if( $post['category'] == 'F' ) selected @endif>Front-End</option>
-                    <option value="B" @if( $post['category'] == 'B' ) selected @endif>Back-End</option>
-                    <option value="M" @if( $post['category'] == 'M' ) selected @endif>Mobile</option>
-                    <option value="G" @if( $post['category'] == 'G' ) selected @endif>Guides</option>
-                </select>
-            </div>
-            <div class="mb-3">
-                <label for="body" class="form-label">Post Body:</label>
-                <textarea name="body" id="body">{!! html_entity_decode($post['body']) !!}</textarea>
-                <hr>
-            </div>
-            <div class="d-flex justify-content-end gap-3">
-                <a href="{{ route('IsslerBlog.index') }}" class="btn btn-md btn-outline-secondary">Cancel</a>
-                <button type="submit" class="btn btn-md btn-outline-light">Save</button>
-            </div>
+            @include('IsslerBlog.Partials.StoreUpdateForm', ['post' => $post, 'method' => "PUT"])
         </form>
     </div>
 </div>

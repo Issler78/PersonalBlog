@@ -26,54 +26,18 @@
     #thumbnail-img {
         max-width: 100%;
     }
+
+    .thumbnail-img {
+        width: 400px;
+        height: 225px;
+    }
 </style>
 <div class="bg-body-tertiary">
     <div class="container my-5">
         <h1 class="mb-4">Publish New Post</h1>
         <form action="{{ route('IsslerBlog.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
-            <div class="mb-3">
-                <label for="thumbnailInput" class="form-label">Thumbnail:</label>
-                <label class="thumbnail text-secondary" for="thumbnailInput">
-                    <span id="thumbnail-img"></span>
-                </label>
-                <input type="file" name="thumbnail" id="thumbnailInput" class="d-none">
-                @error('thumbnail')
-                    <span class="mt-2 text-danger">{{ $message }}</span>
-                @enderror
-            </div>
-            <div class="mb-3">
-                <label for="title" class="form-label">Title:</label>
-                <input name="title" type="text" id="title" class="form-control @error('title') is-invalid @else is-valid @enderror" placeholder="Example: Guide for future PHP Developers" value="{{ old('title') }}">
-                @error('title')
-                    <span class="mt-2 text-danger">{{ $message }}</span>
-                @enderror
-            </div>
-            <div class="mb-5">
-                <label for="category" class="form-label">Category:</label>
-                <select name="category" id="category" class="form-select @error('category') is-invalid @else is-valid @enderror">
-                    <option selected>Select the Category of the Post</option>
-                    <option {{ old('category') == "F" ? "selected" : "" }} value="F">Front-End</option>
-                    <option {{ old('category') == "B" ? "selected" : "" }} value="B">Back-End</option>
-                    <option {{ old('category') == "M" ? "selected" : "" }} value="M">Mobile</option>
-                    <option {{ old('category') == "G" ? "selected" : "" }} value="G">Guides</option>
-                </select>
-                @error('category')
-                    <span class="mt-2 text-danger">{{ $message }}</span>
-                @enderror
-            </div>
-            <div class="mb-3">
-                <label for="body" class="form-label">Post Body:</label>
-                <textarea name="body" id="body">{{ old('body') }}</textarea>
-                @error('body')
-                    <span class="mt-2 text-danger">{{ $message }}</span>
-                @enderror
-                <hr>
-            </div>
-            <div class="d-flex justify-content-end gap-3">
-                <a href="{{ route('IsslerBlog.index') }}" class="btn btn-md btn-outline-secondary">Cancel</a>
-                <button type="submit" class="btn btn-md btn-outline-light">Publish</button>
-            </div>
+            @include('IsslerBlog.Partials.StoreUpdateForm')
         </form>
     </div>
 </div>

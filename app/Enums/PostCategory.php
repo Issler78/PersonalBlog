@@ -9,11 +9,11 @@ enum PostCategory: string
     case M = "Mobile";
     case G = "Guides";
     
-    public static function fromValue($name)
+    public static function fromValue(string $category)
     {
         foreach (self::cases() as $case)
         {
-            if ($case->value == $name)
+            if ($case->name == $category)
             {
                 return $case->value;
             }

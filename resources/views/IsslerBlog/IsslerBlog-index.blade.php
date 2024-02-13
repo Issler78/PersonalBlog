@@ -38,7 +38,7 @@
                         </span>
                             <div class="d-flex justify-content-between mb-4">
                                 <a href="#" class="btn btn-outline-secondary rounded-0" style="font-size: 14px; padding: 3px 6px;">
-                                    {{ $post['category'] }}
+                                    {{ getCategoryValue($post['category']) }}
                                 </a>
                                 <a href="{{ route('IsslerBlog.edit', ['id' => $post['id']]) }}" title="Edit Post" class="btn btn-outline-danger rounded-0" style="font-size: 14px; padding: 3px 6px;">
                                     <i class="bi bi-pencil-square"></i> Edit

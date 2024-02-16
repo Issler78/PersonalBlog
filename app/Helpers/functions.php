@@ -10,12 +10,12 @@ if (!function_exists("getCategoryValue"))
     }
 }
 
-if (!function_exists("formatDate"))
+if (!function_exists("dateFormat"))
 {
-    function formatDate(DateTimeInterface $date)
+    function dateFormat(DateTimeInterface $date)
     {
-        $formatDate = date_format($date, "M jS, g:i A");
+        $dateFormat = date_format($date, "M jS, g:i A");
 
-        return $formatDate;
+        return $dateFormat;
     }
 }

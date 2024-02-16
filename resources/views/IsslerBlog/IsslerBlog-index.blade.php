@@ -49,7 +49,7 @@
                                 <a href="{{ route('IsslerBlog.show', ['id' => $post['id']]) }}" title="Read More" class="btn btn-lg btn-outline-light px-5">
                                     <i class="bi bi-book-half"></i> Read More
                                 </a>
-                                <small class="text-body-secondary fs-6">{{ formatDate($post['created_at']) }}</small>
+                                <small class="text-body-secondary fs-6">{{ dateFormat($post['created_at']) }}</small>
                             </div>
                         </div>
                     </div>

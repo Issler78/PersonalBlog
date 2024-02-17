@@ -14,7 +14,7 @@
         @if ($method === "PUT")
             <div>
                 <p class="form-label">Current Thumbnail:</p>
-                <img src="/img/posts/thumbnails/{{ $post['thumbnail'] }}" alt="Current Thumbnail" style="background-size: contain;" width="400" height="225">
+                <img src="/img/posts/thumbnails/{{ $post['thumbnail'] }}" title="Current Thumbnail" alt="Current Thumbnail" style="background-size: contain;" width="400" height="225">
             </div>
         @endif
     @endisset

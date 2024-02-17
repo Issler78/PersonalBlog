@@ -1,14 +1,8 @@
 @extends('IsslerBlog.Layouts.IsslerBlogMain')
 
 @section('content')
-<style>
-    .container {
-        max-width: 820px;
-        min-width: 260px;
-    }
-</style>
 <div class="bg-body-tertiary">
-    <div class="container my-5">
+    <div class="container my-5" style="max-width: 820px; min-width: 260px;">
         <a href="{{ route('IsslerBlog.publish') }}" title="Add Post" class="btn btn-md btn-outline-light mb-3">
             <i class="bi bi-plus-lg"></i> Add Post
         </a>
@@ -19,7 +13,7 @@
                         <h2 class="fw-bold">{{ $post['title'] }}</h2>
                     </a>
                     <div class="card shadow-sm">
-                        <img src="/img/posts/thumbnails/{{ $post['thumbnail'] }}" alt="Thumbnail" width="794px" height="400px">
+                        <img src="/img/posts/thumbnails/{{ $post['thumbnail'] }}" title="Thumbnail" alt="Thumbnail" width="794px" height="400px">
                         <div class="card-body">
                         <span 
                             class="card-text mb-3 fs-6" 

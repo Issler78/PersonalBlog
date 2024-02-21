@@ -4,16 +4,14 @@ namespace App\Services;
 
 use App\DTOs\Posts\NewPostDTO;
 use App\DTOs\Posts\UpdatePostDTO;
+use App\Repositories\Interfaces\PostRepositoryORMInterface;
 use stdClass;
 
 class PostService
 {
-    protected $repository;
-
-    public function __construct()
-    {
-
-    }
+    public function __construct(
+        protected PostRepositoryORMInterface $repository
+    ){}
 
     public function getAll(string $filter = null): array
     {

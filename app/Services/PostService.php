@@ -2,6 +2,8 @@
 
 namespace App\Services;
 
+use App\DTOs\Posts\NewPostDTO;
+use App\DTOs\Posts\UpdatePostDTO;
 use stdClass;
 
 class PostService
@@ -18,18 +20,10 @@ class PostService
         return $this->repository->getAll($filter);
     }
 
-    public function new(
-        string $thumbnailName,
-        string $title,
-        string $category,
-        string $body
-    ): stdClass
+    public function new(NewPostDTO $dto): stdClass
     {
         return $this->repository->new(
-            $thumbnailName,
-            $title,
-            $category,
-            $body,
+            $dto
         );
     }
 
@@ -38,20 +32,10 @@ class PostService
         return $this->repository->findOne($id);
     }
 
-    public function update(
-        string $id,
-        string $thumbnailName,
-        string $title,
-        string $category,
-        string $body
-    ): stdClass|null
+    public function update(UpdatePostDTO $dto): stdClass|null
     {
         return $this->repository->update(
-            $id,
-            $thumbnailName,
-            $title,
-            $category,
-            $body,
+            $dto
         );
     }
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUpdatePostRequest;
 use App\Models\Post;
+use App\Services\PostService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
@@ -12,12 +13,12 @@ use Illuminate\Validation\Rule;
 class PostController extends Controller
 {
     public function __construct(
-        protected Post $model
+        protected PostService $service
     ){}
 
-    public function index()
+    public function index(Request $request)
     {
-        $posts = $this->model->all();
+        $posts = $this->service->getAll($request->filter);
 
         return view('IsslerBlog.IsslerBlog-index', compact('posts'));
     }
@@ -38,31 +39,31 @@ class PostController extends Controller
             $thumbnail->move(public_path('img/posts/thumbnails'), $thumbnailName);
         }
         
-        $this->model->create([
-            'thumbnail' => $thumbnailName,
-            'title' => $request->title,
-            'category' => $request->category,
-            'body' => $request->body
-        ]);
+        $this->service->new(
+            $thumbnailName,
+            $request->title,
+            $request->category,
+            $request->body
+        );
 
         return redirect()->route('IsslerBlog.index');
     }
 
     public function show(string $id)
     {
-        $post = $this->model->find($id);
+        $post = $this->service->findOne($id);
 
         return view('IsslerBlog.IsslerBlog-show', compact('post'));
     }
 
-    public function edit(string $id)
+    public function edit(string $id, Post $post)
     {
-        $post = $this->model->find($id);
+        $post = $post->findOrFail($id);
 
         return view('IsslerBlog.IsslerBlog-edit', compact('post'));
     }
 
-    public function update(string $id, StoreUpdatePostRequest $request)
+    public function update(string $id, StoreUpdatePostRequest $request, Post $post)
     {
         if ($request->hasFile('thumbnail'))
         {
@@ -71,30 +72,31 @@ class PostController extends Controller
             $thumbnailName = md5($thumbnail->getClientOriginalName() . strtotime("now") . "." . $thumbnail->extension());
 
             $thumbnail->move(public_path('img/posts/thumbnails'), $thumbnailName);
-            unlink(public_path('img/posts/thumbnails/' . $this->model->findOrFail($id)->thumbnail));
+            unlink(public_path('img/posts/thumbnails/' . $post->findOrFail($id)->thumbnail));
         }
         else
         {
-            $thumbnailName = $this->model->findOrFail($id)->thumbnail;
+            $thumbnailName = $post->findOrFail($id)->thumbnail;
         }
 
-        $this->model->findOrFail($id)->update([
-            'thumbnail' => $thumbnailName,
-            'title' => $request->title,
-            'category' => $request->category,
-            'body' => $request->body 
-        ]);
+        $this->service->update(
+            $id,
+            $thumbnailName,
+            $request->title,
+            $request->category,
+            $request->body 
+        );
 
         return redirect()->route('IsslerBlog.index');
     }
 
-    public function destroy(string $id)
+    public function destroy(string $id, Post $post)
     {
-        $post = $this->model->findOrFail($id);
+        $post = $post->findOrFail($id);
 
         unlink(public_path('/img/posts/thumbnails/' . $post->thumbnail));
 
-        $post->delete();
+        $this->service->delete($id);
 
         return redirect()->route('IsslerBlog.index');
     }

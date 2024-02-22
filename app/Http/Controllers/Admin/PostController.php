@@ -77,7 +77,7 @@ class PostController extends Controller
         }
 
         $this->service->update(
-            UpdatePostDTO::makeFromRequest($request, $id, $thumbnailName)
+            UpdatePostDTO::makeFromRequest($request, $thumbnailName)
         );
 
         return redirect()->route('IsslerBlog.index');

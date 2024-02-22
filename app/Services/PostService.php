@@ -32,9 +32,7 @@ class PostService
 
     public function update(UpdatePostDTO $dto): stdClass|null
     {
-        return $this->repository->update(
-            $dto
-        );
+        return $this->repository->update($dto);
     }
 
     public function delete(string $id): void

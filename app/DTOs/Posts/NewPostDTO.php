@@ -7,10 +7,10 @@ use App\Http\Requests\StoreUpdatePostRequest;
 class NewPostDTO
 {
     public function __construct(
-        string $thumbnailName,
-        string $title,
-        string $category,
-        string $body
+        public string $thumbnailName,
+        public string $title,
+        public string $category,
+        public string $body
     ){}
 
     public static function makeFromRequest(StoreUpdatePostRequest $request, string $thumbnailName): self

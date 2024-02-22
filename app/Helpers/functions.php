@@ -12,9 +12,10 @@ if (!function_exists("getCategoryValue"))
 
 if (!function_exists("dateFormat"))
 {
-    function dateFormat(DateTimeInterface $date)
+    function dateFormat(string $date)
     {
-        $dateFormat = date_format($date, "M jS, g:i A");
+        $dateTime = date_create($date);
+        $dateFormat = date_format($dateTime, "M jS, g:i A");
 
         return $dateFormat;
     }

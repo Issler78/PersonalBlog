@@ -8,7 +8,7 @@ class UpdatePostDTO
 {
     public function __construct(
         public string $id,
-        public string $thumbanailName,
+        public string $thumbanail,
         public string $title,
         public string $category,
         public string $body

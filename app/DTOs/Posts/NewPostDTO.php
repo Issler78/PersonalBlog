@@ -7,7 +7,7 @@ use App\Http\Requests\StoreUpdatePostRequest;
 class NewPostDTO
 {
     public function __construct(
-        public string $thumbnailName,
+        public string $thumbnail,
         public string $title,
         public string $category,
         public string $body

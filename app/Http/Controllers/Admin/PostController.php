@@ -44,9 +44,9 @@ class PostController extends Controller
         return view('IsslerBlog.IsslerBlog-show', compact('post'));
     }
 
-    public function edit(string $id, Post $post)
+    public function edit(string $id)
     {
-        $post = $post->findOrFail($id);
+        $post = $this->service->findOne($id);
 
         return view('IsslerBlog.IsslerBlog-edit', compact('post'));
     }

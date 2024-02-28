@@ -14,7 +14,7 @@
         @if ($method === "PUT")
             <div>
                 <p class="form-label">Current Thumbnail:</p>
-                <img src="/img/posts/thumbnails/{{ $post['thumbnail'] }}" title="Current Thumbnail" alt="Current Thumbnail" style="background-size: contain;" width="400" height="225">
+                <img src="/img/posts/thumbnails/{{ $post->thumbnail }}" title="Current Thumbnail" alt="Current Thumbnail" style="background-size: contain;" width="400" height="225">
             </div>
         @endif
     @endisset
@@ -25,7 +25,7 @@
 </div>
 <div class="mb-3">
     <label for="title" class="form-label">Title:</label>
-    <input name="title" type="text" id="title" class="form-control @error('title') is-invalid @enderror" placeholder="Example: Guide for future PHP Developers" value="{{ $post['title'] ?? old('title') }}">
+    <input name="title" type="text" id="title" class="form-control @error('title') is-invalid @enderror" placeholder="Example: Guide for future PHP Developers" value="{{ $post->title ?? old('title') }}">
     @error('title')
         <span class="mt-2 text-danger">{{ $message }}</span>
     @enderror
@@ -39,7 +39,7 @@
                 @isset($oldCategory)
                     {{ $oldCategory == "F" ? "selected" : "" }}
                 @else
-                   {{ $post['category'] == "F" ? "selected" : ""}}
+                   {{ $post->category == "F" ? "selected" : ""}}
                 @endisset
             @else
                 {{ $oldCategory == "F" ? "selected" : "" }}
@@ -52,7 +52,7 @@
                 @isset($oldCategory)
                     {{ $oldCategory == "B" ? "selected" : "" }}
                 @else
-                   {{ $post['category'] == "B" ? "selected" : ""}}
+                   {{ $post->category == "B" ? "selected" : ""}}
                 @endisset
             @else
                 {{ $oldCategory == "B" ? "selected" : "" }}
@@ -65,7 +65,7 @@
                 @isset($oldCategory)
                     {{ $oldCategory == "M" ? "selected" : "" }}
                 @else
-                   {{ $post['category'] == "M" ? "selected" : ""}}
+                   {{ $post->category == "M" ? "selected" : ""}}
                 @endisset
             @else
                 {{ $oldCategory == "M" ? "selected" : "" }}
@@ -78,7 +78,7 @@
                 @isset($oldCategory)
                     {{ $oldCategory == "G" ? "selected" : "" }}
                 @else
-                   {{ $post['category'] == "G" ? "selected" : ""}}
+                   {{ $post->category == "G" ? "selected" : ""}}
                 @endisset
             @else
                 {{ $oldCategory == "G" ? "selected" : "" }}
@@ -93,7 +93,7 @@
 </div>
 <div class="mb-3">
     <label for="body" class="form-label">Post Body:</label>
-    <textarea name="body" id="body">{{ $post['body'] ?? old('body') }}</textarea>
+    <textarea name="body" id="body">{{ $post->body ?? old('body') }}</textarea>
     @error('body')
         <span class="mt-2 text-danger">{{ $message }}</span>
     @enderror

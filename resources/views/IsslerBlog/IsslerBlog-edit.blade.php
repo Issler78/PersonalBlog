@@ -35,14 +35,14 @@
 <div class="bg-body-tertiary">
     <div class="container my-5">
         <div class="d-flex justify-content-between align-items-center">
-            <h1 class="mb-4">Edit Post "{{ $post['title'] }}"</h1>
-            <form action="{{ route('IsslerBlog.destroy', ['id' => $post['id']]) }}" method="POST">
+            <h1 class="mb-4">Edit Post: "{{ $post->title }}"</h1>
+            <form action="{{ route('IsslerBlog.destroy', ['id' => $post->id]) }}" method="POST">
                 @csrf
                 @method('DELETE')
                 <button type="submit" class="btn btn-lg btn-outline-danger ms-4" title="Delete Post" style="padding: 3px 6px;"><i class="bi bi-trash3"></i></button>
             </form>
         </div>
-        <form action="{{ route('IsslerBlog.update', ['id' => $post['id']]) }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('IsslerBlog.update', ['id' => $post->id]) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
             @include('IsslerBlog.Partials.StoreUpdateForm', ['post' => $post, 'method' => "PUT"])

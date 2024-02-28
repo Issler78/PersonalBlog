@@ -34,7 +34,7 @@ class UpdatePostDTO
         {
             $thumbnail = $request->thumbnail;
     
-            $thumbnailName = md5($thumbnail->getClientOriginalName() . strtotime("now") . "." . $thumbnail->extension());
+            $thumbnailName = md5($thumbnail->getClientOriginalName() . strtotime("now")) . "." . $thumbnail->extension();
 
             $thumbnail->move(public_path('img/posts/thumbnails'), $thumbnailName);
             unlink(public_path('img/posts/thumbnails/' . $post->thumbnail));

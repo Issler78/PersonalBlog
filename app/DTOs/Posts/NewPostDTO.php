@@ -33,7 +33,7 @@ class NewPostDTO
     
             $thumbnailName = md5($thumbnail->getClientOriginalName() . strtotime("now")) . "." . $thumbnail->extension();
     
-            $thumbnail->move(public_path('img/posts/thumbnails'), $thumbnailName);
+            $thumbnail->move(public_path('img/posts/thumbnails/'), $thumbnailName);
         }
 
         return $thumbnailName;

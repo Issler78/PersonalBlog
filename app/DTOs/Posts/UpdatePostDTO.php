@@ -9,7 +9,7 @@ class UpdatePostDTO
 {
     public function __construct(
         public string $id,
-        public string $thumbanail,
+        public string $thumbnail,
         public string $title,
         public string $category,
         public string $body
@@ -36,7 +36,7 @@ class UpdatePostDTO
     
             $thumbnailName = md5($thumbnail->getClientOriginalName() . strtotime("now")) . "." . $thumbnail->extension();
 
-            $thumbnail->move(public_path('img/posts/thumbnails'), $thumbnailName);
+            $thumbnail->move(public_path('img/posts/thumbnails/'), $thumbnailName);
             unlink(public_path('img/posts/thumbnails/' . $post->thumbnail));
         }
         else

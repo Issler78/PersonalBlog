@@ -54,7 +54,7 @@ class PostEloquentORM implements PostRepositoryORMInterface
         {
             return null;
         }
-
+        
         $post->update(
             (array) $dto
         );
@@ -64,6 +64,10 @@ class PostEloquentORM implements PostRepositoryORMInterface
 
     public function delete(string $id): void
     {
-        $this->model->findOrFail($id)->delete();
+        $post = $this->model->findOrFail($id);
+
+        unlink(public_path('/img/posts/thumbnails/' . $post->thumbnail));
+
+        $post->delete();
     }
 }

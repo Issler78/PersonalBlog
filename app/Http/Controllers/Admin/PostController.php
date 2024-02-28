@@ -51,7 +51,7 @@ class PostController extends Controller
         return view('IsslerBlog.IsslerBlog-edit', compact('post'));
     }
 
-    public function update(string $id, StoreUpdatePostRequest $request, Post $post)
+    public function update(StoreUpdatePostRequest $request)
     {
         $this->service->update(
             UpdatePostDTO::makeFromRequest($request)
@@ -60,12 +60,8 @@ class PostController extends Controller
         return redirect()->route('IsslerBlog.index');
     }
 
-    public function destroy(string $id, Post $post)
+    public function destroy(string $id)
     {
-        $post = $post->findOrFail($id);
-
-        unlink(public_path('/img/posts/thumbnails/' . $post->thumbnail));
-
         $this->service->delete($id);
 
         return redirect()->route('IsslerBlog.index');

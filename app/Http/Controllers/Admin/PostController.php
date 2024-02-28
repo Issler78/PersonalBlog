@@ -30,17 +30,8 @@ class PostController extends Controller
 
     public function store(StoreUpdatePostRequest $request)
     {
-        if ($request->hasFile('thumbnail'))
-        {    
-            $thumbnail = $request->thumbnail;
-    
-            $thumbnailName = md5($thumbnail->getClientOriginalName() . strtotime("now") . "." . $thumbnail->extension());
-    
-            $thumbnail->move(public_path('img/posts/thumbnails'), $thumbnailName);
-        }
-        
         $this->service->new(
-            NewPostDTO::makeFromRequest($request, $thumbnailName)
+            NewPostDTO::makeFromRequest($request)
         );
 
         return redirect()->route('IsslerBlog.index');
@@ -62,22 +53,8 @@ class PostController extends Controller
 
     public function update(string $id, StoreUpdatePostRequest $request, Post $post)
     {
-        if ($request->hasFile('thumbnail'))
-        {
-            $thumbnail = $request->thumbnail;
-    
-            $thumbnailName = md5($thumbnail->getClientOriginalName() . strtotime("now") . "." . $thumbnail->extension());
-
-            $thumbnail->move(public_path('img/posts/thumbnails'), $thumbnailName);
-            unlink(public_path('img/posts/thumbnails/' . $post->findOrFail($id)->thumbnail));
-        }
-        else
-        {
-            $thumbnailName = $post->findOrFail($id)->thumbnail;
-        }
-
         $this->service->update(
-            UpdatePostDTO::makeFromRequest($request, $thumbnailName)
+            UpdatePostDTO::makeFromRequest($request)
         );
 
         return redirect()->route('IsslerBlog.index');

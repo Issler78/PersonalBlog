@@ -20,9 +20,7 @@ class PostService
 
     public function new(NewPostDTO $dto): stdClass
     {
-        return $this->repository->new(
-            $dto
-        );
+        return $this->repository->new($dto);
     }
 
     public function findOne(string $id): stdClass|null

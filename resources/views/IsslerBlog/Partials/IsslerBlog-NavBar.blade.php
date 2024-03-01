@@ -31,9 +31,9 @@
                     <a class="nav-link" href="#">Guides</a>
                 </li>
             </ul>
-            <form class="d-flex">
+            <form class="d-flex" action="{{ route('IsslerBlog.index') }}" method="GET">
                 <div class="input-group">
-                    <input type="text" class="form-control rounded-start-pill" placeholder="Search" aria-label="Search" aria-describedby="Search-Icon">
+                    <input name="filter" value="{{ $filters['filter'] ?? '' }}" type="text" class="form-control rounded-start-pill" placeholder="Search" aria-label="Search" aria-describedby="Search-Icon">
                     <span class="input-group-text rounded-end-pill" id="Search-Icon">
                         <i class="bi bi-search"></i>
                     </span>

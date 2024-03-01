@@ -20,7 +20,9 @@ class PostController extends Controller
     {
         $posts = $this->service->getAll($request->filter);
 
-        return view('IsslerBlog.IsslerBlog-index', compact('posts'));
+        $filters = ['filter' => $request->get('filter', '')];
+
+        return view('IsslerBlog.IsslerBlog-index', compact('posts', 'filters'));
     }
 
     public function create()

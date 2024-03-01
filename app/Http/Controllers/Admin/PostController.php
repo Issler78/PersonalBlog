@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\DTOs\Posts\NewPostDTO;
-use App\DTOs\Posts\UpdatePostDTO;
+use App\DTOs\Posts\{NewPostDTO, UpdatePostDTO};
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUpdatePostRequest;
-use App\Models\Post;
 use App\Services\PostService;
 use Illuminate\Http\Request;
 
@@ -18,7 +16,11 @@ class PostController extends Controller
 
     public function index(Request $request)
     {
-        $posts = $this->service->getAll($request->filter);
+        $posts = $this->service->paginate(
+            page: $request->get('page', 1),
+            totalPerPage: $request->get('totalPerPage', 10),
+            filter: $request->get('filter', '')
+        );
 
         $filters = ['filter' => $request->get('filter', '')];
 

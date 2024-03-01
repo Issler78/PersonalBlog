@@ -2,10 +2,9 @@
 
 namespace App\Repositories\Eloquent;
 
-use App\DTOs\Posts\NewPostDTO;
-use App\DTOs\Posts\UpdatePostDTO;
+use App\DTOs\Posts\{NewPostDTO, UpdatePostDTO};
 use App\Models\Post;
-use App\Repositories\Interfaces\PostRepositoryORMInterface;
+use App\Repositories\Interfaces\{PostRepositoryORMInterface, PaginationInterface};
 use stdClass;
 
 class PostEloquentORM implements PostRepositoryORMInterface
@@ -13,6 +12,21 @@ class PostEloquentORM implements PostRepositoryORMInterface
     public function __construct(
         protected Post $model
     ){}
+
+    public function paginate(int $page = 1, int $totalPerPage = 10, ?string $filter = null): PaginationInterface
+    {
+        $result = $this->model->
+                            where( function($query) use($filter) {
+                                if ($filter)
+                                {
+                                    $query->where('title', 'like', "%{$filter}%")->
+                                            orWhere('body', 'like', "%{$filter}%");
+                                }
+                            })->
+                            paginate($totalPerPage, ['*'], 'page-' . $page, $page);
+        
+        dd($result);
+    }
 
     public function getAll(string $filter = null): array
     {

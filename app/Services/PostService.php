@@ -2,9 +2,8 @@
 
 namespace App\Services;
 
-use App\DTOs\Posts\NewPostDTO;
-use App\DTOs\Posts\UpdatePostDTO;
-use App\Repositories\Interfaces\PostRepositoryORMInterface;
+use App\DTOs\Posts\{NewPostDTO, UpdatePostDTO};
+use App\Repositories\Interfaces\{PostRepositoryORMInterface, PaginationInterface};
 use stdClass;
 
 class PostService
@@ -12,6 +11,15 @@ class PostService
     public function __construct(
         protected PostRepositoryORMInterface $repository
     ){}
+
+    public function paginate(int $page, int $totalPerPage = 10, int $filter = null): PaginationInterface
+    {
+        return $this->repository->paginate(
+            page: $page,
+            totalPerPage: $totalPerPage,
+            filter: $filter
+        );
+    }
 
     public function getAll(string $filter = null): array
     {

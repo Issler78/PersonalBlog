@@ -5,6 +5,7 @@ namespace App\Repositories\Eloquent;
 use App\DTOs\Posts\{NewPostDTO, UpdatePostDTO};
 use App\Models\Post;
 use App\Repositories\Interfaces\{PostRepositoryORMInterface, PaginationInterface};
+use App\Repositories\Presenters\PaginationPresenter;
 use stdClass;
 
 class PostEloquentORM implements PostRepositoryORMInterface
@@ -25,7 +26,7 @@ class PostEloquentORM implements PostRepositoryORMInterface
                             })->
                             paginate($totalPerPage, ['*'], 'page-' . $page, $page);
         
-        dd($result);
+        return new PaginationPresenter($result);
     }
 
     public function getAll(string $filter = null): array

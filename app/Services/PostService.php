@@ -12,7 +12,7 @@ class PostService
         protected PostRepositoryORMInterface $repository
     ){}
 
-    public function paginate(int $page, int $totalPerPage = 10, int $filter = null): PaginationInterface
+    public function paginate(int $page, int $totalPerPage = 10, string $filter = null): PaginationInterface
     {
         return $this->repository->paginate(
             page: $page,

@@ -23,7 +23,6 @@ class PostController extends Controller
         );
 
         $filters = ['filter' => $request->get('filter', '')];
-        dd($posts);
 
         return view('IsslerBlog.IsslerBlog-index', compact('posts', 'filters'));
     }

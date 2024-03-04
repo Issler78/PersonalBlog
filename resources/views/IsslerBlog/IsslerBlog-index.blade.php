@@ -7,7 +7,7 @@
             <i class="bi bi-plus-lg"></i> Add Post
         </a>
         <div class="row row-cols-1 row-cols-sm-1 row-cols-md-1 g-5">
-            @foreach ($posts as $post)
+            @foreach ($posts->items() as $post)
                 <div class="col">
                     <a href="{{ route('IsslerBlog.show', ['id' => $post['id']]) }}" class="link-light link-underline-opacity-0 link-underline-opacity-100-hover">
                         <h2 class="fw-bold">{{ $post['title'] }}</h2>
@@ -51,6 +51,9 @@
                 <hr>
             @endforeach
         </div>
+        
+        <x-pagination :paginator="$posts" :appends="$filters"/>
+
     </div>
 </div>
 @endsection

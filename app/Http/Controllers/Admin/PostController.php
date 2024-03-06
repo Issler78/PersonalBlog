@@ -16,13 +16,15 @@ class PostController extends Controller
 
     public function index(Request $request)
     {
+        $filters = $request->get('filter', '');
+
         $posts = $this->service->paginate(
             page: $request->get('page', 1),
-            totalPerPage: $request->get('totalPerPage', 10),
-            filter: $request->get('filter', '')
+            totalPerPage: $request->get('totalPerPage', 8),
+            filter: $filters
         );
 
-        $filters = ['filter' => $request->get('filter', '')];
+        $filters = ['filter' => $filters];
 
         return view('IsslerBlog.IsslerBlog-index', compact('posts', 'filters'));
     }

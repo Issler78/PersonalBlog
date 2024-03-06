@@ -12,6 +12,10 @@
         </div>
         <h1 class="fw-bold text-light mb-3">{{ $post->title }}</h1>
         {!! html_entity_decode( addStyles($post->body) ) !!}
+        <hr class="my-4 border-3">
+        
+        @include('IsslerBlog.Partials.Replies')
+
     </div>
 </div>
 @endsection

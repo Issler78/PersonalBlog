@@ -3,12 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Http\Requests\StoreUpdateReplyRequest;
 
 class ReplyController extends Controller
 {
-    public function store()
+    public function store(StoreUpdateReplyRequest $request)
     {
-        dd('test');
+        dd($request);
     }
 }

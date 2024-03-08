@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\DTOs\Replies\NewReplyDTO;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUpdateReplyRequest;
 use App\Services\ReplyService;
@@ -14,6 +15,6 @@ class ReplyController extends Controller
 
     public function store(StoreUpdateReplyRequest $request)
     {
-        $this->service->new();
+        $this->service->new(NewReplyDTO::makeFromRequest($request));
     }
 }

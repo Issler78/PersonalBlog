@@ -7,6 +7,7 @@
     <h2 class="mt-4">Leave your Comment!</h2>
     <form action="{{ route('IsslerBlog.reply.publish') }}" method="POST" class="mt-5">
         @csrf
+        <input type="hidden" name="post_id" value="{{ $post_id }}">
         <div class="mb-3">
             <label for="body" class="form-label">Your comment:</label>
             <textarea name="body" id="body"></textarea>

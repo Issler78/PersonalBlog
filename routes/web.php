@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Admin\PostController;
+use App\Http\Controllers\Admin\{PostController, ReplyController};
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,6 +18,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+// Posts
 Route::get('/IsslerBlog', [PostController::class, 'index'])->name('IsslerBlog.index');
 Route::get('/IsslerBlog/publish', [PostController::class, 'create'])->name('IsslerBlog.publish');
 Route::post('/IsslerBlog/publish', [PostController::class, 'store'])->name('IsslerBlog.store');
@@ -25,3 +26,6 @@ Route::get('/IsslerBlog/{id}', [PostController::class, 'show'])->name('IsslerBlo
 Route::get('/IsslerBlog/{id}/edit', [PostController::class, 'edit'])->name('IsslerBlog.edit');
 Route::put('/IsslerBlog/{id}/edit', [PostController::class, 'update'])->name('IsslerBlog.update');
 Route::delete('/IsslerBlog/{id}', [PostController::class, 'destroy'])->name('IsslerBlog.destroy');
+
+// Replies
+Route::post('/IsslerBlog/reply/publish', [ReplyController::class, 'store'])->name('IsslerBlog.reply.publish');

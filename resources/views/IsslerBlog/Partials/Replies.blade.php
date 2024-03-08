@@ -5,7 +5,8 @@
 </style>
 <div>
     <h2 class="mt-4">Leave your Comment!</h2>
-    <form action="#" method="POST" class="mt-5">
+    <form action="{{ route('IsslerBlog.reply.publish') }}" method="POST" class="mt-5">
+        @csrf
         <div class="mb-3">
             <label for="body" class="form-label">Your comment:</label>
             <textarea name="body" id="body"></textarea>

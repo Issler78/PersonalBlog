@@ -16,5 +16,7 @@ class ReplyController extends Controller
     public function store(StoreUpdateReplyRequest $request)
     {
         $this->service->new(NewReplyDTO::makeFromRequest($request));
+
+        return redirect()->back();
     }
 }

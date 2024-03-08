@@ -11,5 +11,5 @@ class Reply extends Model
 
     protected $table = "replies";
 
-    protected $fillable = ['body'];
+    protected $fillable = ['body', 'post_id'];
 }

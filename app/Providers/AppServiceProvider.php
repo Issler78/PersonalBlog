@@ -2,8 +2,8 @@
 
 namespace App\Providers;
 
-use App\Repositories\Eloquent\PostEloquentORM;
-use App\Repositories\Interfaces\PostRepositoryORMInterface;
+use App\Repositories\Eloquent\{PostEloquentORM, ReplyEloquentORM};
+use App\Repositories\Interfaces\{PostRepositoryORMInterface, ReplyRepositoryORMInterface};
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -14,6 +14,7 @@ class AppServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->app->bind(PostRepositoryORMInterface::class, PostEloquentORM::class);
+        $this->app->bind(ReplyRepositoryORMInterface::class, ReplyEloquentORM::class);
     }
 
     /**

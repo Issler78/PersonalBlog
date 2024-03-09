@@ -24,6 +24,7 @@ class PostEloquentORM implements PostRepositoryORMInterface
                                             orWhere('body', 'like', "%{$filter}%");
                                 }
                             })->
+                            orderBy('created_at', 'desc')->
                             paginate($totalPerPage, ['*'], 'page-' . $page, $page);
         
         return new PaginationPresenter($result);
@@ -40,6 +41,7 @@ class PostEloquentORM implements PostRepositoryORMInterface
                                             orWhere('body', 'like', "%{$filter}%");
                                 }
                             })->
+                            orderBy('created_at', 'desc')->
                             get()->
                             toArray();
     }
@@ -55,7 +57,12 @@ class PostEloquentORM implements PostRepositoryORMInterface
 
     public function findOne(string $id): stdClass|null
     {
-        $post = $this->model->with('replies')->find($id);
+        $post = $this->model->
+                            with(['replies' => function($query) {
+                                $query->orderBy('created_at', 'desc');
+                            }])->
+                            find($id);
+
         if (!$post)
         {
             return null;

@@ -17,7 +17,6 @@ class PostEloquentORM implements PostRepositoryORMInterface
     public function paginate(int $page = 1, int $totalPerPage = 10, ?string $filter = null): PaginationInterface
     {
         $result = $this->model->
-                            with('replies')->
                             where( function($query) use($filter) {
                                 if ($filter)
                                 {
@@ -56,7 +55,7 @@ class PostEloquentORM implements PostRepositoryORMInterface
 
     public function findOne(string $id): stdClass|null
     {
-        $post = $this->model->find($id);
+        $post = $this->model->with('replies')->find($id);
         if (!$post)
         {
             return null;

@@ -14,7 +14,7 @@
         {!! html_entity_decode( addStyles($post->body) ) !!}
         <hr class="my-4 border-3">
         
-        @include('IsslerBlog.Partials.Replies', ['post_id' => $post->id])
+        @include('IsslerBlog.Partials.Replies', ['post' => $post])
 
     </div>
 </div>

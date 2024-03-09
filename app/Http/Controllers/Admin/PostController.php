@@ -23,9 +23,7 @@ class PostController extends Controller
             totalPerPage: $request->get('totalPerPage', 8),
             filter: $filters
         );
-
-        dd($posts);
-
+        
         $filters = ['filter' => $filters];
 
         return view('IsslerBlog.IsslerBlog-index', compact('posts', 'filters'));

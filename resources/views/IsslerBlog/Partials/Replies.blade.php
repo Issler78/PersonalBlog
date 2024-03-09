@@ -7,7 +7,7 @@
     <h2 class="mt-4">Leave your Comment!</h2>
     <form action="{{ route('IsslerBlog.reply.publish') }}" method="POST" class="mt-5">
         @csrf
-        <input type="hidden" name="post_id" value="{{ $post_id }}">
+        <input type="hidden" name="post_id" value="{{ $post->id }}">
         <div class="mb-3">
             <label for="body" class="form-label">Your comment:</label>
             <textarea name="body" id="body"></textarea>
@@ -20,53 +20,31 @@
 <hr class="border-3">
 <div>
     <h2 class="mt-4">Look at the others comments!</h2>
-    <div class="w-100 border border-2 border-secondary rounded p-3 my-5">
-        <div class="d-flex justify-content-between align-items-center">
-            <div class="d-flex justify-content-center align-items-center gap-2">
-                <div class="rounded-circle bg-success d-flex justify-content-center align-items-center border border-black" style="width: 2rem; height: 2rem;">
-                    <span>MI</span>
-                </div>
-                <span class="text-body-secondary">Username</span>
-            </div>
-            <small class="text-body-tertiary">Mar 6th, 1:31 PM</small>
-        </div>
-        <hr class="my-2 border-2 text-body-secondary">
-        <div class="mx-2 mt-3 mb-2">
-            <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae tempora incidunt esse iste odit odio numquam blanditiis quidem officiis architecto aperiam iure perspiciatis culpa obcaecati ad dolor, perferendis voluptas enim earum placeat cum magnam nemo? Ea consequatur ratione, minus perferendis a eligendi dolore ad explicabo in neque consequuntur reprehenderit quas?</span>
-            <div class="d-flex justify-content-between align-items-center mt-3">
-                <a class="text-secondary-emphasis text-decoration-none" href="#">
-                    <div class="d-flex align-items-center gap-2 reply">
-                        <i class="bi bi-caret-down-fill"></i>3 Replies
+    @foreach ($post->replies as $reply)
+        <div class="w-100 border border-2 border-secondary rounded p-3 my-5">
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="d-flex justify-content-center align-items-center gap-2">
+                    <div class="rounded-circle bg-success d-flex justify-content-center align-items-center border border-black" style="width: 2rem; height: 2rem;">
+                        <span>MI</span>
                     </div>
-                </a>
-                <button type="submit" class="btn btn-md btn-outline-light">Reply</button>
-            </div>
-        </div>
-    </div>
-
-    <div class="w-100 border border-2 border-secondary rounded p-3 my-4">
-        <div class="d-flex justify-content-between align-items-center">
-            <div class="d-flex justify-content-center align-items-center gap-2">
-                <div class="rounded-circle bg-success d-flex justify-content-center align-items-center border border-black" style="width: 2rem; height: 2rem;">
-                    <span>MI</span>
+                    <span class="text-body-secondary">Username</span>
                 </div>
-                <span class="text-body-secondary">Username</span>
+                <small class="text-body-tertiary">{{ dateFormat($reply['created_at']) }}</small>
             </div>
-            <small class="text-body-tertiary">Mar 6th, 1:31 PM</small>
-        </div>
-        <hr class="my-2 border-2 text-body-secondary">
-        <div class="mx-2 mt-3 mb-2">
-            <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae tempora incidunt esse iste odit odio numquam blanditiis quidem officiis architecto aperiam iure perspiciatis culpa obcaecati ad dolor, perferendis voluptas enim earum placeat cum magnam nemo? Ea consequatur ratione, minus perferendis a eligendi dolore ad explicabo in neque consequuntur reprehenderit quas?</span>
-            <div class="d-flex justify-content-between align-items-center mt-3">
-                <a class="text-secondary-emphasis text-decoration-none" href="#">
-                    <div class="d-flex align-items-center gap-2 reply">
-                        <i class="bi bi-caret-down-fill"></i>3 Replies
-                    </div>
-                </a>
-                <button type="submit" class="btn btn-md btn-outline-light">Reply</button>
+            <hr class="my-2 border-2 text-body-secondary">
+            <div class="mx-2 mt-3 mb-2">
+                <span>{!! html_entity_decode( addStyles($reply['body']) ) !!}</span>
+                <div class="d-flex justify-content-between align-items-center mt-3">
+                    <a class="text-secondary-emphasis text-decoration-none" href="#">
+                        <div class="d-flex align-items-center gap-2 reply">
+                            <i class="bi bi-caret-down-fill"></i>3 Replies
+                        </div>
+                    </a>
+                    <button type="submit" class="btn btn-md btn-outline-light">Reply</button>
+                </div>
             </div>
         </div>
-    </div>
+    @endforeach
 </div>
 <script>
 tinymce.init({

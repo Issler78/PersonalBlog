@@ -24,6 +24,8 @@ class PostController extends Controller
             filter: $filters
         );
 
+        dd($posts);
+
         $filters = ['filter' => $filters];
 
         return view('IsslerBlog.IsslerBlog-index', compact('posts', 'filters'));

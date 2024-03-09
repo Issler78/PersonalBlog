@@ -4,12 +4,12 @@
     }
 </style>
 <div>
-    <h2 class="mt-4">Leave your Comment!</h2>
+    <h2 class="mt-4">Leave your Reply!</h2>
     <form action="{{ route('IsslerBlog.reply.publish') }}" method="POST" class="mt-5">
         @csrf
         <input type="hidden" name="post_id" value="{{ $post->id }}">
         <div class="mb-3">
-            <label for="body" class="form-label">Your comment:</label>
+            <label for="body" class="form-label">Your reply:</label>
             <textarea name="body" id="body"></textarea>
         </div>
         <div class="d-flex justify-content-end">
@@ -19,7 +19,7 @@
 </div>
 <hr class="border-3">
 <div>
-    <h2 class="mt-4">Look at the others comments!</h2>
+    <h2 class="mt-4">Look at the Others Replies!</h2>
     @forelse ($post->replies as $reply)
         <div class="w-100 border border-2 border-secondary rounded p-3 my-5">
             <div class="d-flex justify-content-between align-items-center">
@@ -45,7 +45,7 @@
             </div>
         </div>
     @empty
-        <p class="fs-5 mb-2">No comments posted😓</p>
+        <p class="fs-5 mb-2">No replies posted😓</p>
     @endforelse
 </div>
 <script>

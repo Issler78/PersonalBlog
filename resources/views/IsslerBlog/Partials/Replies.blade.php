@@ -20,7 +20,7 @@
 <hr class="border-3">
 <div>
     <h2 class="mt-4">Look at the others comments!</h2>
-    @foreach ($post->replies as $reply)
+    @forelse ($post->replies as $reply)
         <div class="w-100 border border-2 border-secondary rounded p-3 my-5">
             <div class="d-flex justify-content-between align-items-center">
                 <div class="d-flex justify-content-center align-items-center gap-2">
@@ -44,7 +44,9 @@
                 </div>
             </div>
         </div>
-    @endforeach
+    @empty
+        <p class="fs-5 mb-2">No comments posted😓</p>
+    @endforelse
 </div>
 <script>
 tinymce.init({

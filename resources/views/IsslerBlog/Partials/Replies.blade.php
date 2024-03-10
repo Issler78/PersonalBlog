@@ -1,5 +1,5 @@
 <style>
-    .reply:hover {
+    .countReplies:hover {
         color: #f8f9fa;
     }
 </style>
@@ -33,15 +33,32 @@
             </div>
             <hr class="my-2 border-2 text-body-secondary">
             <div class="mx-2 mt-3 mb-2">
-                <span>{!! html_entity_decode( addStyles($reply['body']) ) !!}</span>
+                <span class="mb-3">{!! html_entity_decode( addStyles($reply['body']) ) !!}</span>
                 <div class="d-flex justify-content-between align-items-center mt-3">
-                    <a class="text-secondary-emphasis text-decoration-none" href="#">
-                        <div class="d-flex align-items-center gap-2 reply">
+                    <a class="text-secondary-emphasis text-decoration-none" style="display: block;" id="countReplies{{ $reply['id'] }}" href="#">
+                        <div class="d-flex align-items-center gap-2 countReplies">
                             <i class="bi bi-caret-down-fill"></i>3 Replies
                         </div>
                     </a>
-                    <button type="submit" class="btn btn-md btn-outline-light">Reply</button>
+                    <button type="button" id="btn-reply{{ $reply['id'] }}" style="display: block;" class="btn btn-md btn-outline-light" onclick="changeContainerVisibility(<?php echo ($reply['id']); ?>)">Reply</button>
                 </div>
+
+                <div id="container{{ $reply['id'] }}" style="display: none;">
+                    <hr>
+                    <form action="{{ route('IsslerBlog.reply.publish') }}" method="POST" class="mt-3">
+                        @csrf
+                        <input type="hidden" name="post_id" value="{{ $post->id }}">
+                        <div class="mb-3">
+                            <label for="body" class="form-label">Your reply:</label>
+                            <textarea name="body" id="body"></textarea>
+                        </div>
+                        <div class="d-flex justify-content-end gap-2">
+                            <button type="button" class="btn btn-md btn-outline-secondary" onclick="changeContainerVisibility(<?php echo ($reply['id']); ?>)">Cancel</button>
+                            <button type="submit" class="btn btn-md btn-outline-light">Reply</button>
+                        </div>
+                    </form>
+                </div>
+
             </div>
         </div>
     @empty
@@ -49,6 +66,27 @@
     @endforelse
 </div>
 <script>
+function changeContainerVisibility(id)
+{
+    var countReplies = document.getElementById("countReplies" + id);
+    var btnReply = document.getElementById("btn-reply" + id);
+    var container = document.getElementById("container" + id);
+    if (container.style.display === "none")
+    {
+        container.style.display = "block";
+        btnReply.style.display = "none";
+        countReplies.style.display = "none";
+    }
+    else
+    {
+        container.style.display = "none";
+        btnReply.style.display = "block";
+        countReplies.style.display = "block";
+    }
+}
+
+
+
 tinymce.init({
     selector: '#body',
     height: 300,

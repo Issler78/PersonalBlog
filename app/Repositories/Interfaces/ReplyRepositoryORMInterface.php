@@ -8,4 +8,6 @@ use stdClass;
 interface ReplyRepositoryORMInterface
 {
     public function new(NewReplyDTO $dto): stdClass;
+
+    public function delete(string $id): void;
 }

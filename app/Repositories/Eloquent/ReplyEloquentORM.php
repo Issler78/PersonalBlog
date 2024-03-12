@@ -22,7 +22,7 @@ class ReplyEloquentORM implements ReplyRepositoryORMInterface
         return (object) $reply->toArray();
     }
 
-    public function delete(string $id)
+    public function delete(string $id): void
     {
         $this->model->findOrFail($id)->delete();
     }

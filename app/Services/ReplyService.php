@@ -3,12 +3,12 @@
 namespace App\Services;
 
 use App\DTOs\Replies\NewReplyDTO;
-use App\Repositories\Eloquent\ReplyEloquentORM;
+use App\Repositories\Interfaces\ReplyRepositoryORMInterface;
 
 class ReplyService
 {
     public function __construct(
-        protected ReplyEloquentORM $repository
+        protected ReplyRepositoryORMInterface $repository
     ){}
 
     public function new(NewReplyDTO $dto)

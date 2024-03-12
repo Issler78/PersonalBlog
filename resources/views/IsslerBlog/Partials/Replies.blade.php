@@ -41,7 +41,7 @@
                         </div>
                     </a>
                     <div class="d-flex gap-2">
-                        <form action="{{ route('IsslerBlog.reply.destroy', ['id' => $reply['id']]) }}" method="POST">
+                        <form id="btn-delete{{ $reply['id'] }}" action="{{ route('IsslerBlog.reply.destroy', ['id' => $reply['id']]) }}" method="POST" style="display: block;">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-lg btn-outline-danger ms-4" title="Delete Reply" style="padding: 3px 6px;"><i class="bi bi-trash3"></i></button>
@@ -78,17 +78,20 @@ function changeContainerVisibility(id)
     var countReplies = document.getElementById("countReplies" + id);
     var btnReply = document.getElementById("btn-reply" + id);
     var container = document.getElementById("container" + id);
+    var btnDelete = document.getElementById("btn-delete" + id);
     if (container.style.display === "none")
     {
         container.style.display = "block";
         btnReply.style.display = "none";
         countReplies.style.display = "none";
+        btnDelete.style.display = "none";
     }
     else
     {
         container.style.display = "none";
         btnReply.style.display = "block";
         countReplies.style.display = "block";
+        btnDelete.style.display = "block";
     }
 }
 

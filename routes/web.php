@@ -28,4 +28,5 @@ Route::put('/IsslerBlog/{id}/edit', [PostController::class, 'update'])->name('Is
 Route::delete('/IsslerBlog/{id}', [PostController::class, 'destroy'])->name('IsslerBlog.destroy');
 
 // Replies
-Route::post('/IsslerBlog/reply/publish', [ReplyController::class, 'store'])->name('IsslerBlog.reply.publish');
+Route::post('/IsslerBlog/publish/reply', [ReplyController::class, 'store'])->name('IsslerBlog.reply.publish');
+Route::delete('/IsslerBlog/{id}/reply', [ReplyController::class, 'destroy'])->name('IsslerBlog.reply.destroy');

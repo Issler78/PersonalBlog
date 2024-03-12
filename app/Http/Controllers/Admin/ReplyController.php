@@ -19,4 +19,11 @@ class ReplyController extends Controller
 
         return redirect()->back();
     }
+
+    public function destroy(string $id)
+    {
+        $this->service->delete($id);
+
+        return redirect()->back();
+    }
 }

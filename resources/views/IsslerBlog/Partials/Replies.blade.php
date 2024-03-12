@@ -41,7 +41,7 @@
                         </div>
                     </a>
                     <div class="d-flex gap-2">
-                        <form action="#" method="POST">
+                        <form action="{{ route('IsslerBlog.reply.destroy', ['id' => $reply['id']]) }}" method="POST">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-lg btn-outline-danger ms-4" title="Delete Reply" style="padding: 3px 6px;"><i class="bi bi-trash3"></i></button>

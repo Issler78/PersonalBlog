@@ -21,4 +21,9 @@ class ReplyEloquentORM implements ReplyRepositoryORMInterface
 
         return (object) $reply->toArray();
     }
+
+    public function delete(string $id)
+    {
+        $this->model->findOrFail($id)->delete();
+    }
 }

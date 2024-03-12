@@ -15,4 +15,9 @@ class ReplyService
     {
         return $this->repository->new($dto);
     }
+
+    public function delete(string $id)
+    {
+        $this->repository->delete($id);
+    }
 }

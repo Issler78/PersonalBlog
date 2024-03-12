@@ -40,7 +40,14 @@
                             <i class="bi bi-caret-down-fill"></i>3 Replies
                         </div>
                     </a>
-                    <button type="button" id="btn-reply{{ $reply['id'] }}" style="display: block;" class="btn btn-md btn-outline-light" onclick="changeContainerVisibility(<?php echo ($reply['id']); ?>)">Reply</button>
+                    <div class="d-flex gap-2">
+                        <form action="#" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-lg btn-outline-danger ms-4" title="Delete Reply" style="padding: 3px 6px;"><i class="bi bi-trash3"></i></button>
+                        </form>
+                        <button type="button" id="btn-reply{{ $reply['id'] }}" style="display: block;" class="btn btn-md btn-outline-light" onclick="changeContainerVisibility(<?php echo ($reply['id']); ?>)">Reply</button>
+                    </div>
                 </div>
 
                 <div id="container{{ $reply['id'] }}" style="display: none;">

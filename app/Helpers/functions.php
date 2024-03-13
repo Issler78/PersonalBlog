@@ -10,17 +10,6 @@ if (!function_exists("getCategoryValue"))
     }
 }
 
-if (!function_exists("dateFormat"))
-{
-    function dateFormat(string $date)
-    {
-        $dateTime = date_create($date);
-        $dateFormat = date_format($dateTime, "M jS, g:i A");
-
-        return $dateFormat;
-    }
-}
-
 if (!function_exists("addStyles"))
 {
     function addStyles(string $content)

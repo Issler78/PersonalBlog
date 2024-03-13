@@ -29,15 +29,15 @@
                     </div>
                     <span class="text-body-secondary">Username</span>
                 </div>
-                <small class="text-body-tertiary">{{ dateFormat($reply['created_at']) }}</small>
+                <small class="text-body-tertiary">{{ $reply['created_at'] }}</small>
             </div>
             <hr class="my-2 border-2 text-body-secondary">
             <div class="mx-2 mt-3 mb-2">
                 <span class="mb-3">{!! html_entity_decode( addStyles($reply['body']) ) !!}</span>
-                <div class="d-flex justify-content-between align-items-center mt-3">
-                    <a class="text-secondary-emphasis text-decoration-none" style="display: block;" id="countReplies{{ $reply['id'] }}" href="#">
+                <div class="d-flex justify-content-between align-items-center mt-3" style="height: 37.6px">
+                    <a class="text-secondary-emphasis text-decoration-none" style="display: block; cursor: pointer;" id="countReplies{{ $reply['id'] }}" onclick="changeContainerVisibility(<?php echo ($reply['id']); ?>, 'replies')">
                         <div class="d-flex align-items-center gap-2 countReplies">
-                            <i class="bi bi-caret-down-fill"></i>3 Replies
+                            <i id="arrow-icon{{ $reply['id'] }}" class="bi bi-caret-down-fill"></i>3 Replies
                         </div>
                     </a>
                     <div class="d-flex gap-2">
@@ -50,7 +50,7 @@
                     </div>
                 </div>
 
-                <div id="container{{ $reply['id'] }}" style="display: none;">
+                <div id="container-reply{{ $reply['id'] }}" style="display: none;">
                     <hr>
                     <form action="{{ route('IsslerBlog.reply.publish') }}" method="POST" class="mt-3">
                         @csrf
@@ -66,6 +66,10 @@
                     </form>
                 </div>
 
+                <div id="container-replies{{ $reply['id'] }}" style="display: none;">
+                    <p class="mb-0">test</p>
+                </div>
+
             </div>
         </div>
     @empty
@@ -73,25 +77,47 @@
     @endforelse
 </div>
 <script>
-function changeContainerVisibility(id)
+function changeContainerVisibility(id, container = 'reply')
 {
     var countReplies = document.getElementById("countReplies" + id);
     var btnReply = document.getElementById("btn-reply" + id);
-    var container = document.getElementById("container" + id);
+    var containerReply = document.getElementById("container-reply" + id);
     var btnDelete = document.getElementById("btn-delete" + id);
-    if (container.style.display === "none")
+    var containerReplies = document.getElementById("container-replies" + id);
+    var arrowIcon = document.getElementById("arrow-icon" + id);
+
+    if (container === 'reply' && containerReply.style.display === "none")
     {
-        container.style.display = "block";
+        containerReply.style.display = "block";
         btnReply.style.display = "none";
         countReplies.style.display = "none";
         btnDelete.style.display = "none";
     }
-    else
+    else if (container === 'reply' && containerReply.style.display === "block")
     {
-        container.style.display = "none";
+        containerReply.style.display = "none";
         btnReply.style.display = "block";
         countReplies.style.display = "block";
         btnDelete.style.display = "block";
+    }
+    else
+    {
+        if (containerReplies.style.display === "none")
+        {
+            containerReplies.style.display = "block";
+            btnReply.style.display = "none";
+            btnDelete.style.display = "none";
+            arrowIcon.classList.remove("bi-caret-down-fill");
+            arrowIcon.classList.add("bi-caret-up-fill");
+        }
+        else
+        {
+            containerReplies.style.display = "none";
+            btnReply.style.display = "block";
+            btnDelete.style.display = "block";
+            arrowIcon.classList.remove("bi-caret-up-fill");
+            arrowIcon.classList.add("bi-caret-down-fill");
+        }
     }
 }
 

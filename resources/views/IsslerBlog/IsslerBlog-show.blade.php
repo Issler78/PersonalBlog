@@ -8,7 +8,7 @@
             <a href="#" class="btn btn-outline-secondary rounded-0" style="font-size: 14px; padding: 3px 6px;">
                 {{ getCategoryValue($post->category) }}
             </a>
-            <small class="text-body-secondary fs-6">{{ dateFormat($post->created_at) }}</small>
+            <small class="text-body-secondary fs-6">{{ $post->created_at }}</small>
         </div>
         <h1 class="fw-bold text-light mb-3">{{ $post->title }}</h1>
         {!! html_entity_decode( addStyles($post->body) ) !!}

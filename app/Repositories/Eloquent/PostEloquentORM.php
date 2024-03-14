@@ -55,7 +55,7 @@ class PostEloquentORM implements PostRepositoryORMInterface
         return (object) $post->toArray();
     }
 
-    public function findOne(string $id): stdClass|null
+    public function findOne(string $id): Post|null
     {
         $post = $this->model->
                             with(['replies' => function($query) {
@@ -63,12 +63,7 @@ class PostEloquentORM implements PostRepositoryORMInterface
                             }])->
                             find($id);
 
-        if (!$post)
-        {
-            return null;
-        }
-
-        return (object) $post->toArray();
+        return $post ? $post : null;
     }
 
     public function update(UpdatePostDTO $dto): stdClass|null

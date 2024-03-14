@@ -4,6 +4,7 @@ namespace App\Repositories\Interfaces;
 
 use App\DTOs\Posts\NewPostDTO;
 use App\DTOs\Posts\UpdatePostDTO;
+use App\Models\Post;
 use stdClass;
 
 interface PostRepositoryORMInterface
@@ -14,7 +15,7 @@ interface PostRepositoryORMInterface
 
     public function new(NewPostDTO $dto): stdClass;
 
-    public function findOne(string $id): stdClass|null;
+    public function findOne(string $id): Post|null;
 
     public function update(UpdatePostDTO $dto): stdClass|null;
 

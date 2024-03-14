@@ -31,7 +31,7 @@ class PostService
         return $this->repository->new($dto);
     }
 
-    public function findOne(string $id): stdClass|null
+    public function findOne(string $id)
     {
         return $this->repository->findOne($id);
     }

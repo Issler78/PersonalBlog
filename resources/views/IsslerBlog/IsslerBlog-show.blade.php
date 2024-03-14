@@ -1,6 +1,9 @@
 @extends('IsslerBlog.Layouts.IsslerBlogMain')
 
 @section('content')
+@php
+    dd($post);
+@endphp
 <div class="bg-body-tertiary">
     <img src="/img/posts/thumbnails/{{ $post->thumbnail }}" style="width: 100%; max-height: 670px; height: auto;" alt="Thumbnail" title="Thumbnail" class="img-fluid thumbnail">
     <div class="container mx-auto my-5" style="max-width: 1220px; min-width: 260px">

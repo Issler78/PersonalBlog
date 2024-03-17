@@ -15,9 +15,11 @@ return new class extends Migration
             $table->id();
             $table->text('body');
             $table->unsignedBigInteger('post_id');
+            $table->unsignedBigInteger('reply_id')->nullable();
             $table->timestamps();
 
-            $table->foreign('post_id')->references('id')->on('posts');
+            $table->foreign('post_id')->references('id')->on('posts')->onDelete('cascade');
+            $table->foreign('reply_id')->references('id')->on('replies')->onDelete('cascade');
         });
     }
 

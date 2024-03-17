@@ -66,8 +66,87 @@
                     </form>
                 </div>
 
-                <div id="container-replies{{ $reply['id'] }}" style="display: none;">
-                    <p class="mb-0">test</p>
+                <div id="container-replies{{ $reply['id'] }}" style="display: none; padding-left: 24px">
+
+                    <div class="d-flex justify-content-between align-items-center mt-5">
+                        <div class="d-flex justify-content-center align-items-center gap-2">
+                            <div class="rounded-circle bg-success d-flex justify-content-center align-items-center border border-black" style="width: 2rem; height: 2rem;">
+                                <span>MI</span>
+                            </div>
+                            <span class="text-body-secondary">Username</span>
+                        </div>
+                        <small class="text-body-tertiary">Mar 14th, 4:25 PM</small>
+                    </div>
+
+                    <hr class="my-2 border-2 text-body-secondary">
+
+                    <div class="mx-2 mt-3 mb-2">
+                        <span class="mb-3">yeahh</span>
+                        <div class="d-flex justify-content-end align-items-center mt-3" style="height: 37.6px">
+                            <div class="d-flex gap-2">
+                                <form action="#" method="POST">
+                                    @csrf
+                                    <button type="submit" class="btn btn-lg btn-outline-danger ms-4" title="Delete Reply" style="padding: 3px 6px;"><i class="bi bi-trash3"></i></button>
+                                </form>
+                                <button type="button" style="display: block;" class="btn btn-md btn-outline-light" >Reply</button>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="d-flex justify-content-between align-items-center mt-5">
+                        <div class="d-flex justify-content-center align-items-center gap-2">
+                            <div class="rounded-circle bg-success d-flex justify-content-center align-items-center border border-black" style="width: 2rem; height: 2rem;">
+                                <span>MI</span>
+                            </div>
+                            <span class="text-body-secondary">Username</span>
+                        </div>
+                        <small class="text-body-tertiary">Mar 14th, 4:25 PM</small>
+                    </div>
+
+                    <hr class="my-2 border-2 text-body-secondary">
+
+                    <div class="mx-2 mt-3 mb-2">
+                        <span class="mb-3">yeahh, Lorem ipsum, dolor sit amet consectetur adipisicing elit. Error, esse ut soluta eius nihil quae.</span>
+                        <div class="d-flex justify-content-end align-items-center mt-3" style="height: 37.6px">
+                            <div class="d-flex gap-2">
+                                <form action="#" method="POST">
+                                    @csrf
+                                    <button type="submit" class="btn btn-lg btn-outline-danger ms-4" title="Delete Reply" style="padding: 3px 6px;"><i class="bi bi-trash3"></i></button>
+                                </form>
+                                <button type="button" style="display: block;" class="btn btn-md btn-outline-light" >Reply</button>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="d-flex justify-content-between align-items-center mt-5">
+                        <div class="d-flex justify-content-center align-items-center gap-2">
+                            <div class="rounded-circle bg-success d-flex justify-content-center align-items-center border border-black" style="width: 2rem; height: 2rem;">
+                                <span>MI</span>
+                            </div>
+                            <span class="text-body-secondary">Username</span>
+                        </div>
+                        <small class="text-body-tertiary">Mar 14th, 4:25 PM</small>
+                    </div>
+
+                    <hr class="my-2 border-2 text-body-secondary">
+
+                    <div class="mx-2 mt-3 mb-2">
+                        <span class="mb-3">yeahh, Lorem ipsum, dolor sit amet consectetur adipisicing elit. Error, esse ut soluta eius nihil quae.</span>
+                        <div class="d-flex justify-content-end align-items-center mt-3" style="height: 37.6px">
+                            <div class="d-flex gap-2">
+                                <form action="#" method="POST">
+                                    @csrf
+                                    <button type="submit" class="btn btn-lg btn-outline-danger ms-4" title="Delete Reply" style="padding: 3px 6px;"><i class="bi bi-trash3"></i></button>
+                                </form>
+                                <button type="button" style="display: block;" class="btn btn-md btn-outline-light" >Reply</button>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
 
             </div>
@@ -86,25 +165,27 @@ function changeContainerVisibility(id, container = 'reply')
     var containerReplies = document.getElementById("container-replies" + id);
     var arrowIcon = document.getElementById("arrow-icon" + id);
 
-    if (container === 'reply' && containerReply.style.display === "none")
+    if (container === 'reply')
     {
-        containerReply.style.display = "block";
-        btnReply.style.display = "none";
-        countReplies.style.display = "none";
-        btnDelete.style.display = "none";
-    }
-    else if (container === 'reply' && containerReply.style.display === "block")
-    {
-        containerReply.style.display = "none";
-        btnReply.style.display = "block";
-        countReplies.style.display = "block";
-        btnDelete.style.display = "block";
+        if (containerReply.style.display === "none") {
+            containerReply.style.display = "block";
+            btnReply.style.display = "none";
+            countReplies.style.display = "none";
+            btnDelete.style.display = "none";
+        }
+        else
+        {
+            containerReply.style.display = "none";
+            btnReply.style.display = "block";
+            countReplies.style.display = "block";
+            btnDelete.style.display = "block";
+        }
     }
     else
     {
-        if (containerReplies.style.display === "none")
-        {
+        if (containerReplies.style.display === "none") {
             containerReplies.style.display = "block";
+            containerReplies.style.margin = "10px 0px 0px";
             btnReply.style.display = "none";
             btnDelete.style.display = "none";
             arrowIcon.classList.remove("bi-caret-down-fill");
@@ -119,6 +200,7 @@ function changeContainerVisibility(id, container = 'reply')
             arrowIcon.classList.add("bi-caret-down-fill");
         }
     }
+
 }
 
 

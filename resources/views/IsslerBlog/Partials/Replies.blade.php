@@ -21,136 +21,85 @@
 <div>
     <h2 class="mt-4">Look at the Others Replies!</h2>
     @forelse ($post->replies as $reply)
-        <div class="w-100 border border-2 border-secondary rounded p-3 my-5">
-            <div class="d-flex justify-content-between align-items-center">
-                <div class="d-flex justify-content-center align-items-center gap-2">
-                    <div class="rounded-circle bg-success d-flex justify-content-center align-items-center border border-black" style="width: 2rem; height: 2rem;">
-                        <span>MI</span>
-                    </div>
-                    <span class="text-body-secondary">Username</span>
-                </div>
-                <small class="text-body-tertiary">{{ $reply['created_at'] }}</small>
-            </div>
-            <hr class="my-2 border-2 text-body-secondary">
-            <div class="mx-2 mt-3 mb-2">
-                <span class="mb-3">{!! html_entity_decode( addStyles($reply['body']) ) !!}</span>
-                <div class="d-flex justify-content-between align-items-center mt-3" style="height: 37.6px">
-                    <a class="text-secondary-emphasis text-decoration-none" style="display: block; cursor: pointer;" id="countReplies{{ $reply['id'] }}" onclick="changeContainerVisibility(<?php echo ($reply['id']); ?>, 'replies')">
-                        <div class="d-flex align-items-center gap-2 countReplies">
-                            <i id="arrow-icon{{ $reply['id'] }}" class="bi bi-caret-down-fill"></i>3 Replies
+        @if (is_null($reply->reply_id))
+            <div class="w-100 border border-2 border-secondary rounded p-3 my-5">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="d-flex justify-content-center align-items-center gap-2">
+                        <div class="rounded-circle bg-success d-flex justify-content-center align-items-center border border-black" style="width: 2rem; height: 2rem;">
+                            <span>MI</span>
                         </div>
-                    </a>
-                    <div class="d-flex gap-2">
-                        <form id="btn-delete{{ $reply['id'] }}" action="{{ route('IsslerBlog.reply.destroy', ['id' => $reply['id']]) }}" method="POST" style="display: block;">
+                        <span class="text-body-secondary">Username</span>
+                    </div>
+                    <small class="text-body-tertiary">{{ $reply['created_at'] }}</small>
+                </div>
+                <hr class="my-2 border-2 text-body-secondary">
+                <div class="mx-2 mt-3 mb-2">
+                    <span class="mb-3">{!! html_entity_decode( addStyles($reply['body']) ) !!}</span>
+                    <div class="d-flex justify-content-between align-items-center mt-3" style="height: 37.6px">
+                        <a class="text-secondary-emphasis text-decoration-none" style="display: block; cursor: pointer;" id="countReplies{{ $reply['id'] }}" onclick="changeContainerVisibility(<?php echo ($reply['id']); ?>, 'replies')">
+                            <div class="d-flex align-items-center gap-2 countReplies">
+                                <i id="arrow-icon{{ $reply['id'] }}" class="bi bi-caret-down-fill"></i>3 Replies
+                            </div>
+                        </a>
+                        <div class="d-flex gap-2">
+                            <form id="btn-delete{{ $reply['id'] }}" action="{{ route('IsslerBlog.reply.destroy', ['id' => $reply['id']]) }}" method="POST" style="display: block;">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-lg btn-outline-danger ms-4" title="Delete Reply" style="padding: 3px 6px;"><i class="bi bi-trash3"></i></button>
+                            </form>
+                            <button type="button" id="btn-reply{{ $reply['id'] }}" style="display: block;" class="btn btn-md btn-outline-light" onclick="changeContainerVisibility(<?php echo ($reply['id']); ?>)">Reply</button>
+                        </div>
+                    </div>
+
+                    <div id="container-reply{{ $reply['id'] }}" style="display: none;">
+                        <hr>
+                        <form action="{{ route('IsslerBlog.reply.publish') }}" method="POST" class="mt-3">
                             @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-lg btn-outline-danger ms-4" title="Delete Reply" style="padding: 3px 6px;"><i class="bi bi-trash3"></i></button>
+                            <input type="hidden" name="post_id" value="{{ $post->id }}">
+                            <input type="hidden" name="reply_id" value="{{ $reply->id }}">
+                            <div class="mb-3">
+                                <label for="body" class="form-label">Your reply:</label>
+                                <textarea name="body" id="body"></textarea>
+                            </div>
+                            <div class="d-flex justify-content-end gap-2">
+                                <button type="button" class="btn btn-md btn-outline-secondary" onclick="changeContainerVisibility(<?php echo ($reply['id']); ?>)">Cancel</button>
+                                <button type="submit" class="btn btn-md btn-outline-light">Reply</button>
+                            </div>
                         </form>
-                        <button type="button" id="btn-reply{{ $reply['id'] }}" style="display: block;" class="btn btn-md btn-outline-light" onclick="changeContainerVisibility(<?php echo ($reply['id']); ?>)">Reply</button>
-                    </div>
-                </div>
-
-                <div id="container-reply{{ $reply['id'] }}" style="display: none;">
-                    <hr>
-                    <form action="{{ route('IsslerBlog.reply.publish') }}" method="POST" class="mt-3">
-                        @csrf
-                        <input type="hidden" name="post_id" value="{{ $post->id }}">
-                        <div class="mb-3">
-                            <label for="body" class="form-label">Your reply:</label>
-                            <textarea name="body" id="body"></textarea>
-                        </div>
-                        <div class="d-flex justify-content-end gap-2">
-                            <button type="button" class="btn btn-md btn-outline-secondary" onclick="changeContainerVisibility(<?php echo ($reply['id']); ?>)">Cancel</button>
-                            <button type="submit" class="btn btn-md btn-outline-light">Reply</button>
-                        </div>
-                    </form>
-                </div>
-
-                <div id="container-replies{{ $reply['id'] }}" style="display: none; padding-left: 24px">
-
-                    <div class="d-flex justify-content-between align-items-center mt-5">
-                        <div class="d-flex justify-content-center align-items-center gap-2">
-                            <div class="rounded-circle bg-success d-flex justify-content-center align-items-center border border-black" style="width: 2rem; height: 2rem;">
-                                <span>MI</span>
-                            </div>
-                            <span class="text-body-secondary">Username</span>
-                        </div>
-                        <small class="text-body-tertiary">Mar 14th, 4:25 PM</small>
                     </div>
 
-                    <hr class="my-2 border-2 text-body-secondary">
+                    <div id="container-replies{{ $reply['id'] }}" style="display: none; padding-left: 24px">
 
-                    <div class="mx-2 mt-3 mb-2">
-                        <span class="mb-3">yeahh</span>
-                        <div class="d-flex justify-content-end align-items-center mt-3" style="height: 37.6px">
-                            <div class="d-flex gap-2">
-                                <form action="#" method="POST">
-                                    @csrf
-                                    <button type="submit" class="btn btn-lg btn-outline-danger ms-4" title="Delete Reply" style="padding: 3px 6px;"><i class="bi bi-trash3"></i></button>
-                                </form>
-                                <button type="button" style="display: block;" class="btn btn-md btn-outline-light" >Reply</button>
+                        <div class="d-flex justify-content-between align-items-center mt-5">
+                            <div class="d-flex justify-content-center align-items-center gap-2">
+                                <div class="rounded-circle bg-success d-flex justify-content-center align-items-center border border-black" style="width: 2rem; height: 2rem;">
+                                    <span>MI</span>
+                                </div>
+                                <span class="text-body-secondary">Username</span>
+                            </div>
+                            <small class="text-body-tertiary">Mar 14th, 4:25 PM</small>
+                        </div>
+
+                        <hr class="my-2 border-2 text-body-secondary">
+
+                        <div class="mx-2 mt-3 mb-2">
+                            <span class="mb-3">yeahh</span>
+                            <div class="d-flex justify-content-end align-items-center mt-3" style="height: 37.6px">
+                                <div class="d-flex gap-2">
+                                    <form action="#" method="POST">
+                                        @csrf
+                                        <button type="submit" class="btn btn-lg btn-outline-danger ms-4" title="Delete Reply" style="padding: 3px 6px;"><i class="bi bi-trash3"></i></button>
+                                    </form>
+                                    <button type="button" style="display: block;" class="btn btn-md btn-outline-light" >Reply</button>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-
-
-                    <div class="d-flex justify-content-between align-items-center mt-5">
-                        <div class="d-flex justify-content-center align-items-center gap-2">
-                            <div class="rounded-circle bg-success d-flex justify-content-center align-items-center border border-black" style="width: 2rem; height: 2rem;">
-                                <span>MI</span>
-                            </div>
-                            <span class="text-body-secondary">Username</span>
-                        </div>
-                        <small class="text-body-tertiary">Mar 14th, 4:25 PM</small>
-                    </div>
-
-                    <hr class="my-2 border-2 text-body-secondary">
-
-                    <div class="mx-2 mt-3 mb-2">
-                        <span class="mb-3">yeahh, Lorem ipsum, dolor sit amet consectetur adipisicing elit. Error, esse ut soluta eius nihil quae.</span>
-                        <div class="d-flex justify-content-end align-items-center mt-3" style="height: 37.6px">
-                            <div class="d-flex gap-2">
-                                <form action="#" method="POST">
-                                    @csrf
-                                    <button type="submit" class="btn btn-lg btn-outline-danger ms-4" title="Delete Reply" style="padding: 3px 6px;"><i class="bi bi-trash3"></i></button>
-                                </form>
-                                <button type="button" style="display: block;" class="btn btn-md btn-outline-light" >Reply</button>
-                            </div>
-                        </div>
-                    </div>
-
-
-
-                    <div class="d-flex justify-content-between align-items-center mt-5">
-                        <div class="d-flex justify-content-center align-items-center gap-2">
-                            <div class="rounded-circle bg-success d-flex justify-content-center align-items-center border border-black" style="width: 2rem; height: 2rem;">
-                                <span>MI</span>
-                            </div>
-                            <span class="text-body-secondary">Username</span>
-                        </div>
-                        <small class="text-body-tertiary">Mar 14th, 4:25 PM</small>
-                    </div>
-
-                    <hr class="my-2 border-2 text-body-secondary">
-
-                    <div class="mx-2 mt-3 mb-2">
-                        <span class="mb-3">yeahh, Lorem ipsum, dolor sit amet consectetur adipisicing elit. Error, esse ut soluta eius nihil quae.</span>
-                        <div class="d-flex justify-content-end align-items-center mt-3" style="height: 37.6px">
-                            <div class="d-flex gap-2">
-                                <form action="#" method="POST">
-                                    @csrf
-                                    <button type="submit" class="btn btn-lg btn-outline-danger ms-4" title="Delete Reply" style="padding: 3px 6px;"><i class="bi bi-trash3"></i></button>
-                                </form>
-                                <button type="button" style="display: block;" class="btn btn-md btn-outline-light" >Reply</button>
-                            </div>
-                        </div>
                     </div>
 
                 </div>
-
             </div>
-        </div>
+        @endif
     @empty
         <p class="fs-5 mb-2">No replies posted😓</p>
     @endforelse

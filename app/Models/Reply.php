@@ -13,7 +13,7 @@ class Reply extends Model
 
     protected $table = "replies";
 
-    protected $fillable = ['body', 'post_id'];
+    protected $fillable = ['body', 'post_id', 'reply_id'];
 
     public function createdAt(): Attribute
     {

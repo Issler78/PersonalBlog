@@ -56,7 +56,7 @@
                         <form action="{{ route('IsslerBlog.reply.publish') }}" method="POST" class="mt-3">
                             @csrf
                             <input type="hidden" name="post_id" value="{{ $post->id }}">
-                            <input type="hidden" name="reply_id" value="{{ $reply->id }}">
+                            <input type="hidden" name="reply_id" value="{{ $reply['id'] }}">
                             <div class="mb-3">
                                 <label for="body" class="form-label">Your reply:</label>
                                 <textarea name="body" id="body"></textarea>

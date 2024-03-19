@@ -13,6 +13,8 @@ class Reply extends Model
 
     protected $table = "replies";
 
+    protected $with = ['childReplies'];
+
     protected $fillable = ['body', 'post_id', 'reply_id'];
 
     public function createdAt(): Attribute
@@ -25,5 +27,10 @@ class Reply extends Model
     public function post()
     {
         return $this->belongsTo(Post::class, 'post_id');
+    }
+
+    public function childReplies()
+    {
+        return $this->hasMany(Reply::class, 'reply_id');
     }
 }

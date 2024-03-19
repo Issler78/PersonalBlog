@@ -36,11 +36,15 @@
                 <div class="mx-2 mt-3 mb-2">
                     <span class="mb-3">{!! html_entity_decode( addStyles($reply['body']) ) !!}</span>
                     <div class="d-flex justify-content-between align-items-center mt-3" style="height: 37.6px">
-                        <a class="text-secondary-emphasis text-decoration-none" style="display: block; cursor: pointer;" id="countReplies{{ $reply['id'] }}" onclick="changeContainerVisibility(<?php echo ($reply['id']); ?>, 'replies')">
-                            <div class="d-flex align-items-center gap-2 countReplies">
-                                <i id="arrow-icon{{ $reply['id'] }}" class="bi bi-caret-down-fill"></i>3 Replies
-                            </div>
-                        </a>
+                        @if (!$reply->childReplies->isEmpty())
+                            <a class="text-secondary-emphasis text-decoration-none" style="display: block; cursor: pointer;" id="countReplies{{ $reply['id'] }}" onclick="changeContainerVisibility(<?php echo ($reply['id']); ?>, 'replies')">
+                                <div class="d-flex align-items-center gap-2 countReplies">
+                                    <i id="arrow-icon{{ $reply['id'] }}" class="bi bi-caret-down-fill"></i>{{ count($reply->childReplies) }} Reply(ies)
+                                </div>
+                            </a>
+                        @else
+                            <p class="text-secondary-emphasis m-0">No Replies</p>
+                        @endif
                         <div class="d-flex gap-2">
                             <form id="btn-delete{{ $reply['id'] }}" action="{{ route('IsslerBlog.reply.destroy', ['id' => $reply['id']]) }}" method="POST" style="display: block;">
                                 @csrf
@@ -70,31 +74,34 @@
 
                     <div id="container-replies{{ $reply['id'] }}" style="display: none; padding-left: 24px">
 
-                        <div class="d-flex justify-content-between align-items-center mt-5">
-                            <div class="d-flex justify-content-center align-items-center gap-2">
-                                <div class="rounded-circle bg-success d-flex justify-content-center align-items-center border border-black" style="width: 2rem; height: 2rem;">
-                                    <span>MI</span>
+                        @foreach ($reply->childReplies as $childReply)
+                            <div class="d-flex justify-content-between align-items-center mt-5">
+                                <div class="d-flex justify-content-center align-items-center gap-2">
+                                    <div class="rounded-circle bg-success d-flex justify-content-center align-items-center border border-black" style="width: 2rem; height: 2rem;">
+                                        <span>MI</span>
+                                    </div>
+                                    <span class="text-body-secondary">Username</span>
                                 </div>
-                                <span class="text-body-secondary">Username</span>
+                                <small class="text-body-tertiary">{{ $childReply['created_at'] }}</small>
                             </div>
-                            <small class="text-body-tertiary">Mar 14th, 4:25 PM</small>
-                        </div>
 
-                        <hr class="my-2 border-2 text-body-secondary">
+                            <hr class="my-2 border-2 text-body-secondary">
 
-                        <div class="mx-2 mt-3 mb-2">
-                            <span class="mb-3">yeahh</span>
-                            <div class="d-flex justify-content-end align-items-center mt-3" style="height: 37.6px">
-                                <div class="d-flex gap-2">
-                                    <form action="#" method="POST">
-                                        @csrf
-                                        <button type="submit" class="btn btn-lg btn-outline-danger ms-4" title="Delete Reply" style="padding: 3px 6px;"><i class="bi bi-trash3"></i></button>
-                                    </form>
-                                    <button type="button" style="display: block;" class="btn btn-md btn-outline-light" >Reply</button>
+                            <div class="mx-2 mt-3 mb-2">
+                                <span class="mb-3">{!! html_entity_decode( addStyles($childReply['body']) ) !!}</span>
+                                <div class="d-flex justify-content-end align-items-center mt-3" style="height: 37.6px">
+                                    <div class="d-flex gap-2">
+                                        <form action="{{ route('IsslerBlog.reply.destroy', ['id' => $childReply['id'] ]) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-lg btn-outline-danger ms-4" title="Delete Reply" style="padding: 3px 6px;"><i class="bi bi-trash3"></i></button>
+                                        </form>
+                                        <button type="button" style="display: block;" class="btn btn-md btn-outline-light" >Reply</button>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-
+                        @endforeach
+                        
                     </div>
 
                 </div>

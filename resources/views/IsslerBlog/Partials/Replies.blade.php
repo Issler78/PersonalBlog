@@ -137,7 +137,7 @@ function containerChildReply(id, username)
     if (container.style.display === "none")
     {
         container.style.display = "block";
-        replyInput.setContent(username);
+        replyInput.setContent('@' + username);
     }
     else
     {

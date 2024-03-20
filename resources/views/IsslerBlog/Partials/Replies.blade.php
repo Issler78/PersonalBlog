@@ -96,12 +96,29 @@
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-lg btn-outline-danger ms-4" title="Delete Reply" style="padding: 3px 6px;"><i class="bi bi-trash3"></i></button>
                                         </form>
-                                        <button type="button" style="display: block;" class="btn btn-md btn-outline-light" >Reply</button>
+                                        <button type="button" style="display: block;" class="btn btn-md btn-outline-light" onclick="containerChildReply(<?php echo ($reply['id']); ?>, 'Username')">Reply</button>
                                     </div>
                                 </div>
                             </div>
                         @endforeach
                         
+                    </div>
+
+                    <div id="child-replies-reply{{ $reply['id'] }}" style="display: none;">
+                    <hr>
+                        <form action="{{ route('IsslerBlog.reply.publish') }}" method="POST" class="mt-3">
+                            @csrf
+                            <input type="hidden" name="post_id" value="{{ $post->id }}">
+                            <input type="hidden" name="reply_id" value="{{ $reply['id'] }}">
+                            <div class="mb-3">
+                                <label for="body" class="form-label">Your reply:</label>
+                                <textarea name="body" id="body-child-reply{{ $reply['id'] }}"></textarea>
+                            </div>
+                            <div class="d-flex justify-content-end gap-2">
+                                <button type="button" class="btn btn-md btn-outline-secondary" onclick="containerChildReply(<?php echo ($reply['id']); ?>, null)">Cancel</button>
+                                <button type="submit" class="btn btn-md btn-outline-light">Reply</button>
+                            </div>
+                        </form>
                     </div>
 
                 </div>
@@ -112,6 +129,22 @@
     @endforelse
 </div>
 <script>
+function containerChildReply(id, username)
+{
+    var container = document.getElementById("child-replies-reply" + id);
+    var replyInput = tinymce.get('body-child-reply' + id);
+
+    if (container.style.display === "none")
+    {
+        container.style.display = "block";
+        replyInput.setContent(username);
+    }
+    else
+    {
+        container.style.display = "none ";
+    }
+}
+
 function changeContainerVisibility(id, container = 'reply')
 {
     var countReplies = document.getElementById("countReplies" + id);
@@ -162,7 +195,7 @@ function changeContainerVisibility(id, container = 'reply')
 
 
 tinymce.init({
-    selector: '#body',
+    selector: '#body, textarea[id^="body-child-reply"]',
     height: 300,
     plugins: [
         'table', 'emoticons', 'help', 'lists', 'preview', 'wordcount', 'charmap', 'visualblocks', 'visualchars', 'link', 'image'

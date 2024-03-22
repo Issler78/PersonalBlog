@@ -1,8 +1,8 @@
 @php
     $oldCategory = old('category');
 @endphp
-<div class="mb-3 d-flex flex-wrap">
-    <div class="me-lg-3 mb-4">
+<div class="mb-2 d-flex flex-wrap">
+    <div class="me-lg-3">
         <label for="thumbnailInput" class="form-label">Thumbnail:</label>
         <label class="thumbnail text-secondary" for="thumbnailInput">
             <span id="thumbnail-img"></span>
@@ -18,12 +18,11 @@
             </div>
         @endif
     @endisset
-
-    @error('thumbnail')
-        <span class="mt-2 text-danger">{{ $message }}</span>
-    @enderror
 </div>
-<div class="mb-3">
+@error('thumbnail')
+    <span class="mt-2 text-danger">{{ $message }}</span>
+@enderror
+<div class="mb-3 mt-4">
     <label for="title" class="form-label">Title:</label>
     <input name="title" type="text" id="title" class="form-control @error('title') is-invalid @enderror" placeholder="Example: Guide for future PHP Developers" value="{{ $post->title ?? old('title') }}">
     @error('title')

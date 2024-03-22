@@ -5,7 +5,10 @@
 </style>
 <div>
     <h2 class="mt-4">Leave your Reply!</h2>
-    <form action="{{ route('IsslerBlog.reply.publish') }}" method="POST" class="mt-5">
+    @error('body')
+        <span class="mt-2 text-danger">{{ $message }}</span>
+    @enderror
+    <form action="{{ route('IsslerBlog.reply.publish') }}" method="POST" class="mt-4">
         @csrf
         <input type="hidden" name="post_id" value="{{ $post->id }}">
         <div class="mb-3">

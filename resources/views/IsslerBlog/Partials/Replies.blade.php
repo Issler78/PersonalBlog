@@ -18,7 +18,8 @@
     </form>
 </div>
 <hr class="border-3">
-<div>
+<div class="mb-2">
+    <x-messages></x-messages>
     <h2 class="mt-4">Look at the Others Replies!</h2>
     @forelse ($post->replies as $reply)
         @if (is_null($reply->reply_id))

@@ -40,7 +40,7 @@ class PostController extends Controller
             NewPostDTO::makeFromRequest($request)
         );
 
-        return redirect()->route('IsslerBlog.index');
+        return redirect()->route('IsslerBlog.index')->with('message', 'Successfuly Published Post!');
     }
 
     public function show(string $id)
@@ -63,13 +63,13 @@ class PostController extends Controller
             UpdatePostDTO::makeFromRequest($request)
         );
 
-        return redirect()->route('IsslerBlog.index');
+        return redirect()->route('IsslerBlog.index')->with('message', 'Post Updated Successfully!');
     }
 
     public function destroy(string $id)
     {
         $this->service->delete($id);
 
-        return redirect()->route('IsslerBlog.index');
+        return redirect()->route('IsslerBlog.index')->with('message', 'Post Deleted Successfully!');
     }
 }

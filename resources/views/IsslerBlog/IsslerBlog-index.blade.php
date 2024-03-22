@@ -2,6 +2,7 @@
 
 @section('content')
 <div class="bg-body-tertiary">
+    <x-messages></x-messages>
     <div class="container my-5" style="max-width: 820px; min-width: 260px;">
         @if (!empty($posts->items()))
             <a href="{{ route('IsslerBlog.publish') }}" title="Add Post" class="btn btn-md btn-outline-light mb-3">

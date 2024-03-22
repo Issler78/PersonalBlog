@@ -17,13 +17,13 @@ class ReplyController extends Controller
     {
         $this->service->new(NewReplyDTO::makeFromRequest($request));
 
-        return redirect()->back();
+        return redirect()->back()->with('message', 'Reply Successfully Published!');
     }
 
     public function destroy(string $id)
     {
         $this->service->delete($id);
 
-        return redirect()->back();
+        return redirect()->back()->with('message', 'Reply Deleted Successfully');
     }
 }

@@ -35,7 +35,7 @@
 <div class="bg-body-tertiary">
     <div class="container my-5">
         <div class="d-flex justify-content-between align-items-center">
-            <h1 class="mb-4">Edit Post: "{{ $post->title }}"</h1>
+            <h1 class="mb-0">Edit Post: "{{ $post->title }}"</h1>
             <form action="{{ route('IsslerBlog.destroy', ['id' => $post->id]) }}" method="POST">
                 @csrf
                 @method('DELETE')

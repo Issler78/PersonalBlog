@@ -24,6 +24,6 @@ class ReplyController extends Controller
     {
         $this->service->delete($id);
 
-        return redirect()->back()->with('message', 'Reply Deleted Successfully');
+        return redirect()->back()->with('message', 'Reply Deleted Successfully!');
     }
 }

@@ -1,8 +1,8 @@
 @php
     $oldCategory = old('category');
 @endphp
-<div class="mb-2 d-flex flex-wrap">
-    <div class="me-lg-3">
+<div class="mt-4 mb-2 d-flex flex-wrap">
+    <div class="me-lg-3 mb-4">
         <label for="thumbnailInput" class="form-label">Thumbnail:</label>
         <label class="thumbnail text-secondary" for="thumbnailInput">
             <span id="thumbnail-img"></span>

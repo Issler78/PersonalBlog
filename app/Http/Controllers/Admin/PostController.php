@@ -14,14 +14,15 @@ class PostController extends Controller
         protected PostService $service
     ){}
 
-    public function index(Request $request)
+    public function index(Request $request, ?string $category = null)
     {
         $filters = $request->get('filter', '');
 
         $posts = $this->service->paginate(
             page: $request->get('page', 1),
             totalPerPage: $request->get('totalPerPage', 8),
-            filter: $filters
+            filter: $filters,
+            category: $category
         );
         
         $filters = ['filter' => $filters];

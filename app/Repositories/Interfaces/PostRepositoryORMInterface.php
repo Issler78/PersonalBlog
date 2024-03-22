@@ -9,7 +9,7 @@ use stdClass;
 
 interface PostRepositoryORMInterface
 {
-    public function paginate(int $page = 1, int $totalPerPage = 10, string $filter = null): PaginationInterface;
+    public function paginate(int $page = 1, int $totalPerPage = 10, string $filter = null, string $category = null): PaginationInterface;
 
     public function getAll(string $filter = null): array;
 

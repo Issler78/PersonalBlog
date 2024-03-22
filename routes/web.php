@@ -27,6 +27,8 @@ Route::get('/IsslerBlog/{id}/edit', [PostController::class, 'edit'])->name('Issl
 Route::put('/IsslerBlog/{id}/edit', [PostController::class, 'update'])->name('IsslerBlog.update');
 Route::delete('/IsslerBlog/{id}', [PostController::class, 'destroy'])->name('IsslerBlog.destroy');
 
+Route::get('/IsslerBlog/{category}/category', [PostController::class, 'index'])->name('IsslerBlog.category');
+
 // Replies
 Route::post('/IsslerBlog/publish/reply', [ReplyController::class, 'store'])->name('IsslerBlog.reply.publish');
 Route::delete('/IsslerBlog/{id}/reply', [ReplyController::class, 'destroy'])->name('IsslerBlog.reply.destroy');

@@ -14,14 +14,18 @@ class PostEloquentORM implements PostRepositoryORMInterface
         protected Post $model
     ){}
 
-    public function paginate(int $page = 1, int $totalPerPage = 10, ?string $filter = null): PaginationInterface
+    public function paginate(int $page = 1, int $totalPerPage = 10, ?string $filter = null, string $category = null): PaginationInterface
     {
         $result = $this->model->
-                            where( function($query) use($filter) {
+                            where( function($query) use($filter, $category) {
                                 if ($filter)
                                 {
                                     $query->where('title', 'like', "%{$filter}%")->
                                             orWhere('body', 'like', "%{$filter}%");
+                                }
+                                if ($category)
+                                {
+                                    $query->where('category', "{$category}");
                                 }
                             })->
                             orderBy('created_at', 'desc')->

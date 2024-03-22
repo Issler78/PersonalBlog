@@ -19,16 +19,16 @@
                     <a class="nav-link active" aria-current="page" href="{{ route('IsslerBlog.index') }}"><i class="bi bi-house-fill"></i> Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Front-End</a>
+                    <a class="nav-link" href="{{ route('IsslerBlog.category', ['category' => 'F']) }}">Front-End</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Back-End</a>
+                    <a class="nav-link" href="{{ route('IsslerBlog.category', ['category' => 'B']) }}">Back-End</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Mobile</a>
+                    <a class="nav-link" href="{{ route('IsslerBlog.category', ['category' => 'M']) }}">Mobile</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Guides</a>
+                    <a class="nav-link" href="{{ route('IsslerBlog.category', ['category' => 'G']) }}">Guides</a>
                 </li>
             </ul>
             <form class="d-flex" action="{{ route('IsslerBlog.index') }}" method="GET">

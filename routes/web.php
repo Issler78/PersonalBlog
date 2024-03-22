@@ -18,6 +18,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+// Profile
+Route::get('/IsslerBlog/authenticate', function () {
+    return view('IsslerBlog.Authenticate.IsslerBlog-authenticate');
+})->name('IsslerBlog.authenticate');
+
 // Posts
 Route::get('/IsslerBlog', [PostController::class, 'index'])->name('IsslerBlog.index');
 Route::get('/IsslerBlog/publish', [PostController::class, 'create'])->name('IsslerBlog.publish');

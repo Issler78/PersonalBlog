@@ -39,7 +39,7 @@
 
 
 
-        <form action="#" id="signup-form" style="display: none;" method="POST">
+        <form action="{{ route('IsslerBlog.register') }}" id="signup-form" style="display: none;" method="POST">
             @csrf
             <h1 class="text-center">Sign Up</h1>
             <div class="mb-2 mt-4 input-group d-flex flex-wrap">

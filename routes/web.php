@@ -18,7 +18,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// Profile
+// Auth
 Route::get('/IsslerBlog/authenticate', function () {
     return view('IsslerBlog.Authenticate.IsslerBlog-authenticate');
 })->name('IsslerBlog.authenticate');

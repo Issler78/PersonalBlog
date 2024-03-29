@@ -22,4 +22,11 @@ class AuthSessionController extends Controller
 
         return redirect()->intended(route('IsslerBlog.index'));
     }
+
+    public function logout()
+    {
+        Auth::logout();
+
+        return redirect()->route('IsslerBlog.index');
+    }
 }

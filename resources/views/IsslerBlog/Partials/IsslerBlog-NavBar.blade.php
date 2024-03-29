@@ -41,7 +41,10 @@
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" href="#">Edit User</a></li>
                                 <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="#">Sign Out</a></li>
+                                <form action="{{ route('IsslerBlog.logout') }}" method="post">
+                                    @csrf
+                                    <li><button class="dropdown-item" type="submit">Sign Out</button></li>
+                                </form>
                             </ul>
                         </li>
                     @endauth

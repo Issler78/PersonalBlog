@@ -3,7 +3,7 @@
 namespace App\Services;
 
 use App\DTOs\Replies\NewReplyDTO;
-use App\Repositories\Interfaces\ReplyRepositoryORMInterface;
+use App\Contracts\ReplyRepositoryORMInterface;
 
 class ReplyService
 {

@@ -3,7 +3,7 @@
 namespace App\Services;
 
 use App\DTOs\Posts\{NewPostDTO, UpdatePostDTO};
-use App\Repositories\Interfaces\{PostRepositoryORMInterface, PaginationInterface};
+use App\Contracts\{PostRepositoryORMInterface, PaginationInterface};
 use stdClass;
 
 class PostService

@@ -4,7 +4,7 @@ namespace App\Repositories\Eloquent;
 
 use App\DTOs\Posts\{NewPostDTO, UpdatePostDTO};
 use App\Models\Post;
-use App\Repositories\Interfaces\{PostRepositoryORMInterface, PaginationInterface};
+use App\Contracts\{PostRepositoryORMInterface, PaginationInterface};
 use App\Repositories\Presenters\PaginationPresenter;
 use stdClass;
 

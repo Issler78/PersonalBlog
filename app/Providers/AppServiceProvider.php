@@ -3,7 +3,7 @@
 namespace App\Providers;
 
 use App\Repositories\Eloquent\{PostEloquentORM, ReplyEloquentORM};
-use App\Repositories\Interfaces\{PostRepositoryORMInterface, ReplyRepositoryORMInterface};
+use App\Contracts\{PostRepositoryORMInterface, ReplyRepositoryORMInterface};
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider

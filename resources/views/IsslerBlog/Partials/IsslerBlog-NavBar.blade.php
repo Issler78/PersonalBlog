@@ -31,7 +31,12 @@
                     <a class="nav-link" href="{{ route('IsslerBlog.category', ['category' => 'G']) }}">Guides</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="{{ route('IsslerBlog.authenticate') }}"><i class="bi bi-person-fill"></i> Sign In</a>
+                    @guest    
+                        <a class="nav-link active" href="{{ route('IsslerBlog.authenticate') }}"><i class="bi bi-person-fill"></i> Sign In</a>
+                    @endguest
+                    @auth
+                        <a class="nav-link active" href="#"><i class="bi bi-person-fill"></i> Profile</a>
+                    @endauth
                 </li>
             </ul>
             <form class="d-flex" action="{{ route('IsslerBlog.index') }}" method="GET">

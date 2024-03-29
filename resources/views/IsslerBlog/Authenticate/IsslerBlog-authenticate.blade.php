@@ -15,7 +15,7 @@
             </div>
             <div class="mb-2 mt-4 input-group d-flex flex-wrap">
                 <label for="password" class="form-label w-100 m-0">Password:</label>
-                <input name="password" type="password" id="password" class="form-control" aria-label="password-input" placeholder="Min 3 Characters">
+                <input name="password" type="password" id="password" class="form-control" aria-label="password-input" placeholder="Min 8 Characters">
                 <span class="input-group-text" id="password-input">
                     <i class="bi bi-lock-fill"></i>
                 </span>

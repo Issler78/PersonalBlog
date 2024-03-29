@@ -6,13 +6,19 @@
         <form action="{{ route('IsslerBlog.login') }}" id="signin-form" method="POST">
             @csrf
             <h1 class="text-center">Sign In</h1>
+            @if (session()->has('incorrect'))
+                <span class="mt-0 text-danger">{{ session('incorrect') }}</span>
+            @endif
             <div class="mb-2 mt-4 input-group d-flex flex-wrap">
                 <label for="email" class="form-label w-100 m-0">Email:</label>
-                <input name="email" type="text" id="email" class="form-control" aria-label="email-input" placeholder="name@example.com">
+                <input name="email" type="text" id="email" class="form-control" aria-label="email-input" placeholder="name@example.com" value="{{ old('email') }}">
                 <span class="input-group-text" id="email-input">
                     <i class="bi bi-person-fill"></i>
                 </span>
             </div>
+            @error('email')
+                <span class="mt-0 text-danger">{{ $message }}</span>
+            @enderror
             <div class="mb-2 mt-4 input-group d-flex flex-wrap">
                 <label for="password" class="form-label w-100 m-0">Password:</label>
                 <input name="password" type="password" id="password" class="form-control" aria-label="password-input">
@@ -20,6 +26,9 @@
                     <i class="bi bi-lock-fill"></i>
                 </span>
             </div>
+            @error('password')
+                <span class="mt-0 text-danger">{{ $message }}</span>
+            @enderror
             <div class="form-check d-flex justify-content-between mt-3 mb-5">
                 <div>
                     <input class="form-check-input" type="checkbox" value="" id="remember">

@@ -17,15 +17,19 @@ class AuthSessionController extends Controller
 
         if (!Auth::attempt($credentials))
         {
+            $request->session()->regenerate();
+
             return redirect()->route('IsslerBlog.authenticate')->withInput($request->only('email'))->with('incorrect', 'Email or password are incorrect.');
         }
 
         return redirect()->intended(route('IsslerBlog.index'));
     }
 
-    public function logout()
+    public function logout(Request $request)
     {
         Auth::logout();
+
+        $request->session()->invalidate();
 
         return redirect()->route('IsslerBlog.index');
     }

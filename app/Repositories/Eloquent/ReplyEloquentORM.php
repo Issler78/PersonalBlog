@@ -4,7 +4,7 @@ namespace App\Repositories\Eloquent;
 
 use App\DTOs\Replies\NewReplyDTO;
 use App\Models\Reply;
-use App\Repositories\Interfaces\ReplyRepositoryORMInterface;
+use App\Contracts\ReplyRepositoryORMInterface;
 use stdClass;
 
 class ReplyEloquentORM implements ReplyRepositoryORMInterface

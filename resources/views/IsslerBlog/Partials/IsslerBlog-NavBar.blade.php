@@ -2,7 +2,7 @@
 .nav-item a{
     display: inline-block;
 }
-.nav-item a:hover {
+.nav-item:not(.dropdown) a:hover {
     color: #fff;
     box-shadow: 0 2px #fff;
 }
@@ -35,7 +35,15 @@
                         <a class="nav-link active" href="{{ route('IsslerBlog.authenticate') }}"><i class="bi bi-person-fill"></i> Sign In</a>
                     @endguest
                     @auth
-                        <a class="nav-link active" href="#"><i class="bi bi-person-fill"></i> Profile</a>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link active dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-person-fill"></i> Profile</a>
+
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">Edit User</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="#">Sign Out</a></li>
+                            </ul>
+                        </li>
                     @endauth
                 </li>
             </ul>

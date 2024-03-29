@@ -3,7 +3,7 @@
 @section('content')
 <div class="d-flex justify-content-center align-items-center" style="min-height: 698px;">
     <div class="wrapper">
-        <form action="#" id="signin-form" method="POST">
+        <form action="{{ route('IsslerBlog.login') }}" id="signin-form" method="POST">
             @csrf
             <h1 class="text-center">Sign In</h1>
             <div class="mb-2 mt-4 input-group d-flex flex-wrap">

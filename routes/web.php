@@ -34,8 +34,9 @@ Route::delete('/IsslerBlog/{id}', [PostController::class, 'destroy'])->name('Iss
 
 Route::get('/IsslerBlog/{category}/category', [PostController::class, 'index'])->name('IsslerBlog.category');
 
-// Replies
-Route::post('/IsslerBlog/publish/reply', [ReplyController::class, 'store'])->name('IsslerBlog.reply.publish');
-Route::delete('/IsslerBlog/{id}/reply', [ReplyController::class, 'destroy'])->name('IsslerBlog.reply.destroy');
+Route::middleware('auth')->group(function () {
+    Route::post('/IsslerBlog/publish/reply', [ReplyController::class, 'store'])->name('IsslerBlog.reply.publish');
+    Route::delete('/IsslerBlog/{id}/reply', [ReplyController::class, 'destroy'])->name('IsslerBlog.reply.destroy');
+});
 
 require __DIR__ . '/auth.php';

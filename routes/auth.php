@@ -11,4 +11,6 @@ Route::post('/IsslerBlog/auth/register', [RegisteredUserController::class, 'stor
 Route::post('/IsslerBlog/auth', [AuthSessionController::class, 'auth'])->name('IsslerBlog.login');
 
 // Profile
-Route::post('/IsslerBlog/logout', [AuthSessionController::class, 'logout'])->name('IsslerBlog.logout');
+Route::middleware('auth')->group(function () {
+    Route::post('/IsslerBlog/logout', [AuthSessionController::class, 'logout'])->name('IsslerBlog.logout');
+});

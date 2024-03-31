@@ -29,3 +29,21 @@ if (!function_exists("addStyles"))
         return $formattedContent;
     }
 }
+
+if (!function_exists("getInitials"))
+{
+    function getInitials(string $username)
+    {
+        $words = explode(' ', trim($username));
+    
+        $initials = '';
+        
+        foreach ($words as $word) {
+            // Adiciona as duas primeiras letras da palavra às iniciais
+            $initials .= substr($word, 0, 2);
+        }
+        
+        // Retorna as duas primeiras letras das iniciais (ou apenas a primeira, se for uma única palavra)
+        return substr($initials, 0, 2);
+    }
+}

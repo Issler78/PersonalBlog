@@ -30,9 +30,9 @@
                 <div class="d-flex justify-content-between align-items-center">
                     <div class="d-flex justify-content-center align-items-center gap-2">
                         <div class="rounded-circle bg-success d-flex justify-content-center align-items-center border border-black" style="width: 2rem; height: 2rem;">
-                            <span>MI</span>
+                            <span>{{ getInitials($reply['user']['username']) }}</span>
                         </div>
-                        <span class="text-body-secondary">Username</span>
+                        <span class="text-body-secondary">{{ $reply['user']['username'] }}</span>
                     </div>
                     <small class="text-body-tertiary">{{ $reply['created_at'] }}</small>
                 </div>

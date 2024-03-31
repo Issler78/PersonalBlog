@@ -104,7 +104,7 @@
                                                 <button type="submit" class="btn btn-lg btn-outline-danger ms-4" title="Delete Reply" style="padding: 3px 6px;"><i class="bi bi-trash3"></i></button>
                                             </form>
                                         @endcan
-                                        <button type="button" style="display: block;" class="btn btn-md btn-outline-light" onclick="containerChildReply(<?php echo ($reply['id']); ?>, 'Username')">Reply</button>
+                                        <button type="button" style="display: block;" class="btn btn-md btn-outline-light" onclick="containerChildReply(<?php echo ($reply['id']); ?>, '<?php echo ($childReply['user']['username']); ?>')">Reply</button>
                                     </div>
                                 </div>
                             </div>
@@ -149,12 +149,13 @@ function containerChildReply(id, username)
     }
     else
     {
-        container.style.display = "none ";
+        container.style.display = "none";
     }
 }
 
 function changeContainerVisibility(id, container = 'reply')
 {
+    var containerChildReply = document.getElementById("child-replies-reply" + id);
     var countReplies = document.getElementById("countReplies" + id);
     var btnReply = document.getElementById("btn-reply" + id);
     var containerReply = document.getElementById("container-reply" + id);
@@ -190,6 +191,7 @@ function changeContainerVisibility(id, container = 'reply')
         }
         else
         {
+            containerChildReply.style.display = "none";
             containerReplies.style.display = "none";
             btnReply.style.display = "block";
             btnDelete.style.display = "block";

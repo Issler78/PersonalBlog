@@ -5,7 +5,7 @@
     <x-messages></x-messages>
     <div class="container my-5" style="max-width: 820px; min-width: 260px;">
         @if (!empty($posts->items()))
-            @can('admin')    
+            @can('admin')
                 <a href="{{ route('IsslerBlog.publish') }}" title="Add Post" class="btn btn-md btn-outline-light mb-3">
                     <i class="bi bi-plus-lg"></i> Add Post
                 </a>
@@ -35,7 +35,7 @@
                                 {!! strip_tags(html_entity_decode($post['body'])) !!}
                             </span>
                                 <div class="d-flex justify-content-between mb-4">
-                                    <a href="#" class="btn btn-outline-secondary rounded-0" style="font-size: 14px; padding: 3px 6px;">
+                                    <a href="{{ route('IsslerBlog.category', ['category' => $post['category'] ] ) }}" class="btn btn-outline-secondary rounded-0" style="font-size: 14px; padding: 3px 6px;">
                                         {{ getCategoryValue($post['category']) }}
                                     </a>
                                     @can('admin')

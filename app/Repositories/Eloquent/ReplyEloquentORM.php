@@ -5,6 +5,7 @@ namespace App\Repositories\Eloquent;
 use App\DTOs\Replies\NewReplyDTO;
 use App\Models\Reply;
 use App\Contracts\ReplyRepositoryORMInterface;
+use Illuminate\Support\Facades\Gate;
 use stdClass;
 
 class ReplyEloquentORM implements ReplyRepositoryORMInterface
@@ -24,6 +25,13 @@ class ReplyEloquentORM implements ReplyRepositoryORMInterface
 
     public function delete(string $id): void
     {
-        $this->model->findOrFail($id)->delete();
+        $reply = $this->model->findOrFail($id);
+
+        if (Gate::denies('owner', $reply->user->id))
+        {
+            abort(401, 'Unauthorized');
+        }
+
+        $reply->delete();
     }
 }

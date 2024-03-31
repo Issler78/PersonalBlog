@@ -22,9 +22,9 @@ class CheckAdmin
                 return $next($request);
             }
 
-            return response()->json(['error' => 'Unauthorized'], 401);
+            abort(401, 'Unauthorized');
         }
 
-        return response()->json(['error' => 'Unauthorized'], 401);
+        abort(401, 'Unauthorized');
     }
 }

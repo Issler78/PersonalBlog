@@ -145,7 +145,8 @@ function containerChildReply(id, username)
     if (container.style.display === "none")
     {
         container.style.display = "block";
-        replyInput.setContent('@' + username);
+        var content = "<span style='color:#007bff;'>" + '@' + username + "</span>&nbsp;";
+        replyInput.setContent(content);
     }
     else
     {

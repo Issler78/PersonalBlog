@@ -5,9 +5,11 @@
     <x-messages></x-messages>
     <div class="container my-5" style="max-width: 820px; min-width: 260px;">
         @if (!empty($posts->items()))
-            <a href="{{ route('IsslerBlog.publish') }}" title="Add Post" class="btn btn-md btn-outline-light mb-3">
-                <i class="bi bi-plus-lg"></i> Add Post
-            </a>
+            @can('admin')    
+                <a href="{{ route('IsslerBlog.publish') }}" title="Add Post" class="btn btn-md btn-outline-light mb-3">
+                    <i class="bi bi-plus-lg"></i> Add Post
+                </a>
+            @endcan
             <div class="row row-cols-1 row-cols-sm-1 row-cols-md-1 g-5">
                 @foreach ($posts->items() as $post)
                     <div class="col">
@@ -36,9 +38,11 @@
                                     <a href="#" class="btn btn-outline-secondary rounded-0" style="font-size: 14px; padding: 3px 6px;">
                                         {{ getCategoryValue($post['category']) }}
                                     </a>
-                                    <a href="{{ route('IsslerBlog.edit', ['id' => $post['id']]) }}" title="Edit Post" class="btn btn-outline-danger rounded-0" style="font-size: 14px; padding: 3px 6px;">
-                                        <i class="bi bi-pencil-square"></i> Edit
-                                    </a>
+                                    @can('admin')
+                                        <a href="{{ route('IsslerBlog.edit', ['id' => $post['id']]) }}" title="Edit Post" class="btn btn-outline-danger rounded-0" style="font-size: 14px; padding: 3px 6px;">
+                                            <i class="bi bi-pencil-square"></i> Edit
+                                        </a>
+                                    @endcan
                                 </div>
                                                     
                                 <div class="d-flex justify-content-between align-items-center">
@@ -64,7 +68,9 @@
             <div class="d-flex flex-column align-items-center">
                 <p class="fw-semibold fs-2 mb-2">{{ $result }}😓</p>
                 @if ($link)
-                    <p>Click <a href="{{ route('IsslerBlog.publish') }}" class="link-light link-underline-opacity-0 link-underline-opacity-100-hover fw-semibold">here</a> to make a post</p>
+                    @can('admin')
+                        <p>Click <a href="{{ route('IsslerBlog.publish') }}" class="link-light link-underline-opacity-0 link-underline-opacity-100-hover fw-semibold">here</a> to make a post</p>
+                    @endcan
                 @endif
             </div>
         @endif

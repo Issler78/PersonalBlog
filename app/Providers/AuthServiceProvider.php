@@ -26,5 +26,9 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('owner', function (User $user ,string $id) {
             return (string) $user->id === $id;
         });
+
+        Gate::define('admin', function (User $user) {
+            return $user->email === env('MAIL_FROM_ADDRESS');
+        });
     }
 }

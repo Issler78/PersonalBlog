@@ -13,7 +13,7 @@ class Reply extends Model
 
     protected $table = "replies";
 
-    protected $with = ['childReplies'];
+    protected $with = ['childReplies', 'user'];
 
     protected $fillable = ['body', 'post_id', 'reply_id'];
 
@@ -22,6 +22,11 @@ class Reply extends Model
         return Attribute::make(
             get: fn ($createdAt) => Carbon::make($createdAt)->format('M jS, g:i A')
         );
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     public function post()

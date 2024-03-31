@@ -50,11 +50,13 @@
                             <p class="text-secondary-emphasis m-0">No Replies</p>
                         @endif
                         <div class="d-flex gap-2">
-                            <form id="btn-delete{{ $reply['id'] }}" action="{{ route('IsslerBlog.reply.destroy', ['id' => $reply['id']]) }}" method="POST" style="display: block;">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-lg btn-outline-danger ms-4" title="Delete Reply" style="padding: 3px 6px;"><i class="bi bi-trash3"></i></button>
-                            </form>
+                            @can('owner', $reply['user']['id'])
+                                <form id="btn-delete{{ $reply['id'] }}" action="{{ route('IsslerBlog.reply.destroy', ['id' => $reply['id']]) }}" method="POST" style="display: block;">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-lg btn-outline-danger ms-4" title="Delete Reply" style="padding: 3px 6px;"><i class="bi bi-trash3"></i></button>
+                                </form>
+                            @endcan
                             <button type="button" id="btn-reply{{ $reply['id'] }}" style="display: block;" class="btn btn-md btn-outline-light" onclick="changeContainerVisibility(<?php echo ($reply['id']); ?>)">Reply</button>
                         </div>
                     </div>
@@ -95,11 +97,13 @@
                                 <span class="mb-3">{!! html_entity_decode( addStyles($childReply['body']) ) !!}</span>
                                 <div class="d-flex justify-content-end align-items-center mt-3" style="height: 37.6px">
                                     <div class="d-flex gap-2">
-                                        <form action="{{ route('IsslerBlog.reply.destroy', ['id' => $childReply['id'] ]) }}" method="POST">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-lg btn-outline-danger ms-4" title="Delete Reply" style="padding: 3px 6px;"><i class="bi bi-trash3"></i></button>
-                                        </form>
+                                        @can('owner', $childReply['user']['id'])                               
+                                            <form action="{{ route('IsslerBlog.reply.destroy', ['id' => $childReply['id'] ]) }}" method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-lg btn-outline-danger ms-4" title="Delete Reply" style="padding: 3px 6px;"><i class="bi bi-trash3"></i></button>
+                                            </form>
+                                        @endcan
                                         <button type="button" style="display: block;" class="btn btn-md btn-outline-light" onclick="containerChildReply(<?php echo ($reply['id']); ?>, 'Username')">Reply</button>
                                     </div>
                                 </div>

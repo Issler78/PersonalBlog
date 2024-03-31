@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\DTOs\Replies\NewReplyDTO;
 use App\Contracts\ReplyRepositoryORMInterface;
+use Illuminate\Support\Facades\Gate;
 
 class ReplyService
 {
@@ -18,6 +19,11 @@ class ReplyService
 
     public function delete(string $id)
     {
+        if (Gate::denies('owner', $id))
+        {
+            abort(401, 'Unauthorized');
+        }
+
         $this->repository->delete($id);
     }
 }

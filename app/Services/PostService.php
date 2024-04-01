@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\DTOs\Posts\{NewPostDTO, UpdatePostDTO};
 use App\Contracts\{PostRepositoryORMInterface, PaginationInterface};
+use Illuminate\Support\Facades\Gate;
 use stdClass;
 
 class PostService
@@ -29,6 +30,11 @@ class PostService
 
     public function new(NewPostDTO $dto): stdClass
     {
+        if (Gate::denies('admin'))
+        {
+            abort(401, 'Unauthorized');
+        }
+
         return $this->repository->new($dto);
     }
 
@@ -39,11 +45,21 @@ class PostService
 
     public function update(UpdatePostDTO $dto): stdClass|null
     {
+        if (Gate::denies('admin'))
+        {
+            abort(401, 'Unauthorized');
+        }
+
         return $this->repository->update($dto);
     }
 
     public function delete(string $id): void
     {
+        if (Gate::denies('admin'))
+        {
+            abort(401, 'Unauthorized');
+        }
+
         $this->repository->delete($id);
     }
 }

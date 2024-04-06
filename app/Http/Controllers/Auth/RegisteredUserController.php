@@ -26,6 +26,8 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
+        $request->session()->regenerateToken();
+
         return redirect()->route('IsslerBlog.index');
     }
 }

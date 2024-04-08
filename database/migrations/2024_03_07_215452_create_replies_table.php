@@ -12,11 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('replies', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             $table->text('body');
-            $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('post_id');
-            $table->unsignedBigInteger('reply_id')->nullable();
+            $table->uuid('user_id')->index();
+            $table->uuid('post_id')->index();
+            $table->uuid('reply_id')->index()->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

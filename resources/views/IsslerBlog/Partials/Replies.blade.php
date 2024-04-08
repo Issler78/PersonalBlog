@@ -32,7 +32,12 @@
                         <div class="rounded-circle bg-success d-flex justify-content-center align-items-center border border-black" style="width: 2rem; height: 2rem;">
                             <span>{{ getInitials($reply['user']['username']) }}</span>
                         </div>
-                        <span class="text-body-secondary">{{ $reply['user']['username'] }}</span>
+                        <span class="text-body-secondary">
+                            {{ $reply['user']['username'] }}
+                            @if ($reply['user']['email'] === env('MAIL_FROM_ADDRESS'))
+                                <i class="bi bi-check2-circle"></i>
+                            @endif
+                        </span>
                     </div>
                     <small class="text-body-tertiary">{{ $reply['created_at'] }}</small>
                 </div>
@@ -103,7 +108,12 @@
                                     <div class="rounded-circle bg-success d-flex justify-content-center align-items-center border border-black" style="width: 2rem; height: 2rem;">
                                         <span>{{ getInitials($childReply['user']['username']) }}</span>
                                     </div>
-                                    <span class="text-body-secondary">{{ $childReply['user']['username'] }}</span>
+                                    <span class="text-body-secondary">
+                                        {{ $childReply['user']['username'] }}
+                                        @if ($childReply['user']['email'] === env('MAIL_FROM_ADDRESS'))
+                                            <i class="bi bi-check2-circle"></i>
+                                        @endif
+                                    </span>
                                 </div>
                                 <small class="text-body-tertiary">{{ $childReply['created_at'] }}</small>
                             </div>

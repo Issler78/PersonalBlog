@@ -30,6 +30,6 @@ class RegisteredUserController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect()->route('IsslerBlog.index');
+        return redirect()->intended(route('IsslerBlog.index'));
     }
 }

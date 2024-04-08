@@ -24,7 +24,9 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password)
         ]);
 
-        Auth::login($user);
+        $remember = $request->boolean('remember');
+
+        Auth::login($user, $remember);
 
         $request->session()->regenerateToken();
 

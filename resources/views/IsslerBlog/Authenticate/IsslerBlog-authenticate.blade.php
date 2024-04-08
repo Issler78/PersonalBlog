@@ -31,7 +31,7 @@
             @enderror
             <div class="form-check d-flex justify-content-between mt-3 mb-5">
                 <div>
-                    <input class="form-check-input" type="checkbox" value="" id="remember">
+                    <input class="form-check-input" name="remember" type="checkbox" value=1 id="remember">
                     <label class="form-check-label" for="remember">
                         Remember me
                     </label>
@@ -83,7 +83,7 @@
             @enderror
             <div class="form-check d-flex justify-content-between mt-3 mb-5">
                 <div>
-                    <input class="form-check-input" type="checkbox" value="" id="remember">
+                    <input class="form-check-input" name="remember" type="checkbox" value=1 id="remember">
                     <label class="form-check-label" for="remember">
                         Remember me
                     </label>

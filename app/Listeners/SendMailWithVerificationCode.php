@@ -27,6 +27,7 @@ class SendMailWithVerificationCode
 
         $code = rand(100000, 999999);
         $user->verification_code = $code;
+        $user->save();
 
         Mail::to($user->email)->send(
             new VerificationCodeMail($user, $code)

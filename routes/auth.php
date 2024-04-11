@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\AuthSessionController;
 use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\Auth\VerifyEmailController;
 use Illuminate\Support\Facades\Route;
 
 // Register User
@@ -13,4 +14,6 @@ Route::post('/IsslerBlog/auth', [AuthSessionController::class, 'auth'])->name('I
 // Profile
 Route::middleware('auth')->group(function () {
     Route::post('/IsslerBlog/logout', [AuthSessionController::class, 'logout'])->name('IsslerBlog.logout');
+
+    Route::get('/IsslerBlog/verify/email', [VerifyEmailController::class, 'index'])->name('IsslerBlog.verify.send');
 });

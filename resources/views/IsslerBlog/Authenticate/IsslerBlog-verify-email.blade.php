@@ -8,7 +8,10 @@
         </div>
         <h1 class="text-center my-3">Verify your Email</h1>
         <p>We sent a 6-digit code to email <b>name@example.com</b>, please confirm it below.</p>
-        <form action="#" method="POST">
+        @if (session()->has('incorrect'))
+            <span class="mt-0 text-danger">{{ session('incorrect') }}</span>
+        @endif
+        <form action="{{ route('IsslerBlog.verify') }}" method="POST">
             @csrf
             <input type="hidden" name="code" id="code">
             <div class="otp-card-inputs my-4">

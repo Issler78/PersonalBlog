@@ -16,4 +16,5 @@ Route::middleware('auth')->group(function () {
     Route::post('/IsslerBlog/logout', [AuthSessionController::class, 'logout'])->name('IsslerBlog.logout');
 
     Route::get('/IsslerBlog/verify/email', [VerifyEmailController::class, 'index'])->name('IsslerBlog.verify.send');
+    Route::post('/IsslerBlog/verify/email', [VerifyEmailController::class, 'verify'])->name('IsslerBlog.verify');
 });

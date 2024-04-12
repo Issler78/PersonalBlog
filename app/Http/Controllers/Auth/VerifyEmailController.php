@@ -15,4 +15,20 @@ class VerifyEmailController extends Controller
 
         return view('IsslerBlog.Authenticate.IsslerBlog-verify-email');
     }
+
+    public function verify(Request $request)
+    {
+        $code = $request->code;
+        $user = $request->user();
+
+        if ($code != $user->verification_code)
+        {
+            return back()->with('incorrect', 'Code is incorrect. A new code has been sent.');
+        }
+
+        $user->email_verified_at = now();
+        $user->save();
+
+        return redirect()->intended(route('IsslerBlog.index'));
+    }
 }

@@ -7,7 +7,7 @@
             <span class="border border-2 border-light rounded-circle px-3 py-2"><i class="bi bi-envelope-check-fill"></i></span>
         </div>
         <h1 class="text-center my-3">Verify your Email</h1>
-        <p>We sent a 6-digit code to email <b>name@example.com</b>, please confirm it below.</p>
+        <p>We sent a 6-digit code to email <b>{{ $email }}</b>, please confirm it below.</p>
         @if (session()->has('incorrect'))
             <span class="mt-0 text-danger">{{ session('incorrect') }}</span>
         @endif

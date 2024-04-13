@@ -11,9 +11,14 @@ class VerifyEmailController extends Controller
 {
     public function index()
     {
+        if (isset(Auth::user()->email_verified_at))
+        {
+            return redirect()->back();
+        }
+
         VerifyEmailEvent::dispatch(Auth::user());
 
-        return view('IsslerBlog.Authenticate.IsslerBlog-verify-email');
+        return view('IsslerBlog.Authenticate.IsslerBlog-verify-email', ['email' => Auth::user()->email]);
     }
 
     public function verify(Request $request)

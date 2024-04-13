@@ -11,6 +11,9 @@
         @if (session()->has('incorrect'))
             <span class="mt-0 text-danger">{{ session('incorrect') }}</span>
         @endif
+        @if (isset($resend))
+            <span class="mt-0 text-success">{{ $resend }}</span>
+        @endif
         <form action="{{ route('IsslerBlog.verify') }}" method="POST">
             @csrf
             <input type="hidden" name="code" id="code">
@@ -23,7 +26,7 @@
                 <input type="text" class="form-control" maxlength="1">
             </div>
             <div class="d-flex justify-content-between align-items-center">
-                <a href="#" class="text-decoration-none">Resend code</a>
+                <a href="{{ route('IsslerBlog.verify.resend', 1) }}" class="text-decoration-none">Resend code</a>
                 <button id="btn-verify" type="submit" class="btn btn-md btn-outline-light" disabled>Verify</button>
             </div>
         </form>

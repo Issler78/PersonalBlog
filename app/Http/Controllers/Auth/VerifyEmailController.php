@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 
 class VerifyEmailController extends Controller
 {
-    public function index()
+    public function index(?string $resendMessage = null)
     {
         if (isset(Auth::user()->email_verified_at))
         {
@@ -17,6 +17,11 @@ class VerifyEmailController extends Controller
         }
 
         VerifyEmailEvent::dispatch(Auth::user());
+
+        if (isset($resendMessage))
+        {
+            return view('IsslerBlog.Authenticate.IsslerBlog-verify-email', ['email' => Auth::user()->email, 'resend' => 'A new code has been sent.']);
+        }
 
         return view('IsslerBlog.Authenticate.IsslerBlog-verify-email', ['email' => Auth::user()->email]);
     }

@@ -25,7 +25,7 @@ class AuthSessionController extends Controller
             return redirect()->route('IsslerBlog.authenticate')->withInput($request->only('email'))->with('incorrect', 'Email or password are incorrect.');
         }
 
-        return redirect()->intended(route('IsslerBlog.index'));
+        return redirect()->route('IsslerBlog.verify.send');
     }
 
     public function logout(Request $request)

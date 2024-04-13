@@ -11,11 +11,6 @@ class VerifyEmailController extends Controller
 {
     public function index(?string $resendMessage = null)
     {
-        if (isset(Auth::user()->email_verified_at))
-        {
-            return redirect()->back();
-        }
-
         VerifyEmailEvent::dispatch(Auth::user());
 
         if (isset($resendMessage))
@@ -39,6 +34,6 @@ class VerifyEmailController extends Controller
         $user->email_verified_at = now();
         $user->save();
 
-        return redirect()->intended(route('IsslerBlog.index'));
+        return redirect()->route('IsslerBlog.index');
     }
 }

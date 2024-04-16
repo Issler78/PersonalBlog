@@ -36,7 +36,7 @@
                         Remember me
                     </label>
                 </div>
-                <a class="text-decoration-none" href="#">Forgot password?</a>
+                <a class="text-decoration-none" href="{{ route('IsslerBlog.password.request') }}">Forgot password?</a>
             </div>
 
             <div class="d-flex justify-content-between align-items-center">

@@ -1,5 +1,5 @@
 <p>We've received a request to reset your password.</p>
-<a href="#">
+<a href="{{ route('IsslerBlog.password.reset', ['token' => $token]) }}">
     <button class="button-4" role="button">Reset Password</button>
 </a>
 

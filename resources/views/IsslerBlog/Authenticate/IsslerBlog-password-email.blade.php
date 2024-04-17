@@ -3,7 +3,7 @@
 @section('content')
 <div class="d-flex justify-content-center align-items-center" style="min-height: 698px;">
     <div class="wrapper">
-        <form action="#" method="POST">
+        <form action="{{ route('IsslerBlog.password.email') }}" method="POST">
             @csrf
             <div class="text-center fs-1">
                 <span class="border border-2 border-light rounded-circle px-3 py-2">

@@ -7,7 +7,7 @@
             <span class="border border-2 border-light rounded-circle px-3 py-2"><i class="bi bi-envelope-check-fill"></i></span>
         </div>
         <h1 class="text-center my-3">Verify your Email</h1>
-        <p>We have sent a link to reset your password to the {{ $email }} email.</p>
+        <p>We have sent a link to reset your password to the <b>{{ $email }}</b> email.</p>
     </div>
 </div>
 <style>

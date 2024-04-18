@@ -6,6 +6,9 @@
         <form action="{{ route('IsslerBlog.login') }}" id="signin-form" method="POST">
             @csrf
             <h1 class="text-center">Sign In</h1>
+            @if (session()->has('reset-password'))
+                <span class="mt-0 text-success">{{ session('reset-password') }}</span>
+            @endif
             @if (session()->has('incorrect'))
                 <span class="mt-0 text-danger">{{ session('incorrect') }}</span>
             @endif

@@ -33,7 +33,7 @@ Route::middleware('auth.admin')->group(function () {
 });
 
 Route::get('/IsslerBlog', [PostController::class, 'index'])->name('IsslerBlog.index');
-Route::get('/IsslerBlog/{id}', [PostController::class, 'show'])->name('IsslerBlog.show');
+Route::get('/IsslerBlog/post/{id}', [PostController::class, 'show'])->name('IsslerBlog.show');
 Route::get('/IsslerBlog/{category}/category', [PostController::class, 'index'])->name('IsslerBlog.category');
 
 // Reply

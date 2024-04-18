@@ -14,6 +14,7 @@ Route::post('/IsslerBlog/auth/register', [RegisteredUserController::class, 'stor
 Route::get('/IsslerBlog/forgot-password/request', [PasswordResetController::class, 'index'])->name('IsslerBlog.password.request');
 Route::post('/IsslerBlog/forgot-password/request', [PasswordResetController::class, 'store'])->name('IsslerBlog.password.email');
 Route::get('/IsslerBlog/reset-password/{token}', [NewPasswordController::class, 'index'])->name('IsslerBlog.password.reset');
+Route::post('/IsslerBlog/reset-password', [NewPasswordController::class, 'store'])->name('IsslerBlog.password.store');
 
 // Login
 Route::post('/IsslerBlog/auth', [AuthSessionController::class, 'auth'])->name('IsslerBlog.login');

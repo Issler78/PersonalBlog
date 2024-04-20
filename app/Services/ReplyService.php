@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\DTOs\Replies\NewReplyDTO;
 use App\Contracts\ReplyRepositoryORMInterface;
+use App\Events\ReplyEvent;
 
 class ReplyService
 {
@@ -13,7 +14,11 @@ class ReplyService
 
     public function new(NewReplyDTO $dto)
     {
-        return $this->repository->new($dto);
+        $reply = $this->repository->new($dto);
+
+        ReplyEvent::dispatch($reply);
+
+        return $reply;
     }
 
     public function delete(string $id)

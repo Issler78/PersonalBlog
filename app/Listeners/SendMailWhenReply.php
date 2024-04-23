@@ -5,6 +5,7 @@ namespace App\Listeners;
 use App\Events\ReplyEvent;
 use App\Mail\PostReplyRepliedMail;
 use App\Models\Reply;
+use App\Models\User;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\Auth;
@@ -36,9 +37,28 @@ class SendMailWhenReply
             }
             else
             {
-                $replyReplied = Reply::where('id', $reply->reply_id)->first();
+                $parentReply = Reply::where('id', $reply->reply_id)->first();
 
-                $email = $replyReplied->user->email;
+                preg_match('~<p><span style="color: #007bff;">@(\w+)</span>~', $reply->body, $matches);
+                if (!empty($matches))
+                {
+                    $username = $matches[1];
+                    $user = User::where('username', $username)->first();
+                    
+                    if ($user)
+                    {
+                        $email = $user->email;
+                    }
+                    else
+                    {
+                        $email = $parentReply->user->email;
+                    }
+                }
+                else
+                {
+                    $email = $parentReply->user->email;
+                }
+
                 $postOrReply = false;
             }
 

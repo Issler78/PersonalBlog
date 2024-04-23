@@ -20,7 +20,8 @@ class PostReplyRepliedMail extends Mailable
      */
     public function __construct(
         protected stdClass $reply,
-        protected bool $postOrReply
+        protected bool $postOrReply,
+        protected string $username
     )
     {
         //
@@ -45,7 +46,8 @@ class PostReplyRepliedMail extends Mailable
             view: 'IsslerBlog.Mails.Replied',
             with: [
                 'reply' => $this->reply,
-                'postOrReply' => $this->postOrReply
+                'postOrReply' => $this->postOrReply,
+                'username' => $this->username
             ]
         );
     }

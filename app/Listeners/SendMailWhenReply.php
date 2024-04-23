@@ -34,6 +34,7 @@ class SendMailWhenReply
             {
                 $email = env('MAIL_FROM_ADDRESS');
                 $postOrReply = true;
+                $usernameToMail = env('MAIL_FROM_NAME');
             }
             else
             {
@@ -44,19 +45,22 @@ class SendMailWhenReply
                 {
                     $username = $matches[1];
                     $user = User::where('username', $username)->first();
-                    
+
                     if ($user)
                     {
                         $email = $user->email;
+                        $usernameToMail = $user->username;
                     }
                     else
                     {
                         $email = $parentReply->user->email;
+                        $usernameToMail = $parentReply->user->username;
                     }
                 }
                 else
                 {
                     $email = $parentReply->user->email;
+                    $usernameToMail = $parentReply->user->username;
                 }
 
                 $postOrReply = false;
@@ -68,7 +72,7 @@ class SendMailWhenReply
         }
 
         Mail::to($email)->send(
-            new PostReplyRepliedMail($reply, $postOrReply)
+            new PostReplyRepliedMail($reply, $postOrReply, $usernameToMail)
         );
     }
 }

@@ -7,16 +7,23 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\ValidationException;
 
 class RegisteredUserController extends Controller
 {
     public function store(Request $request)
     {
-        $request->validate([
-            'username' => 'required|min:3|max:255|unique:users,username',
-            'email' => 'required|email|max:255|unique:users,email',
-            'password' => 'required|min:8'
-        ]);
+        try {
+            $request->validate([
+                'username_register' => 'required|min:3|max:255|unique:users,username',
+                'email_register' => 'required|email|max:255|unique:users,email',
+                'password_register' => 'required|min:8'
+            ]);
+        } catch (ValidationException $e) {
+            return redirect()->back()->withInput()->withErrors($e->validator)->withFragment('register');
+        }
+
+        dd('passou');
 
         $user = User::create([
             'username' => $request->username,

@@ -5,15 +5,22 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\ValidationException;
 
 class AuthSessionController extends Controller
 {
     public function auth(Request $request)
     {
-        $credentials = $request->validate([
-            'email' => 'required|email',
-            'password' => 'required'
-        ]);
+        
+
+        try {
+            $credentials = $request->validate([
+                'email' => 'required|email',
+                'password' => 'required'
+            ]);
+        } catch (ValidationException $e) {
+            return redirect()->back()->withInput()->withErrors($e->validator)->withFragment('login');
+        }
 
         $remember = $request->boolean('remember');
 

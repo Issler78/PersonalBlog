@@ -44,7 +44,7 @@
 
             <div class="d-flex justify-content-between align-items-center">
                 <button type="submit" class="btn btn-md btn-outline-light">Sign In</button>
-                <p class="m-0 text-end">Don't have an account?<br><a class="text-decoration-none switch-form" href="#">Register</a></p>
+                <p class="m-0 text-end">Don't have an account?<br><a class="text-decoration-none switch-form" href="#register">Register</a></p>
             </div>
         </form>
     
@@ -56,32 +56,32 @@
             <h1 class="text-center">Sign Up</h1>
             <div class="mb-2 mt-4 input-group d-flex flex-wrap">
                 <label for="username" class="form-label w-100 m-0">Username:</label>
-                <input name="username" type="text" id="username" class="form-control" aria-label="username-input" placeholder="Min 3 Characters" value="{{ old('username') }}">
+                <input name="username_register" type="text" id="username" class="form-control" aria-label="username-input" placeholder="Min 3 Characters" value="{{ old('username_register') }}">
                 <span class="input-group-text" id="username-input">
                     <i class="bi bi-person-fill"></i>
                 </span>
             </div>
-            @error('username')
+            @error('username_register')
                 <span class="mt-0 text-danger">{{ $message }}</span>
             @enderror
             <div class="mb-2 mt-4 input-group d-flex flex-wrap">
                 <label for="email" class="form-label w-100 m-0">Email:</label>
-                <input name="email" type="text" id="email" class="form-control" aria-label="email-input" placeholder="name@example.com" value="{{ old('email') }}">
+                <input name="email_register" type="text" id="email" class="form-control" aria-label="email-input" placeholder="name@example.com" value="{{ old('email_register') }}">
                 <span class="input-group-text" id="email-input">
                     <i class="bi bi-person-fill"></i>
                 </span>
             </div>
-            @error('email')
+            @error('email_register')
                 <span class="mt-0 text-danger">{{ $message }}</span>
             @enderror
             <div class="mb-2 mt-4 input-group d-flex flex-wrap">
                 <label for="password" class="form-label w-100 m-0">Password:</label>
-                <input name="password" type="password" id="password" class="form-control" aria-label="password-input" placeholder="Min 8 Characters">
+                <input name="password_register" type="password" id="password" class="form-control" aria-label="password-input" placeholder="Min 8 Characters">
                 <span class="input-group-text" id="password-input">
                     <i class="bi bi-lock-fill"></i>
                 </span>
             </div>
-            @error('password')
+            @error('password_register')
                 <span class="mt-0 text-danger">{{ $message }}</span>
             @enderror
             <div class="form-check d-flex justify-content-between mt-3 mb-5">
@@ -95,11 +95,14 @@
 
             <div class="d-flex justify-content-between align-items-center">
                 <button type="submit" class="btn btn-md btn-outline-light">Sign Up</button>
-                <p class="m-0 text-end">Already have an account?<br><a class="text-decoration-none switch-form" href="#">Sign In</a></p>
+                <p class="m-0 text-end">Already have an account?<br><a class="text-decoration-none switch-form" href="#login">Sign In</a></p>
             </div>
         </form>
     </div>
 </div>
+@if (isset($script))
+    {!! $script !!}
+@endif
 <style>
     body {
         background-image: url('/img/wallpapers/authenticate-wallpaper.jpg');
@@ -133,11 +136,27 @@
         const signupForm = document.getElementById('signup-form');
         const switchLinks = document.querySelectorAll('.switch-form');
 
+        function showFormFromAnchor() {
+            const currentAnchor = window.location.hash;
+
+            if (currentAnchor === '#register') {
+                signinForm.style.display = 'none';
+                signupForm.style.display = 'block';
+            } else {
+                signinForm.style.display = 'block';
+                signupForm.style.display = 'none';
+            }
+        }
+
+        showFormFromAnchor();
+
+        window.addEventListener('hashchange', showFormFromAnchor);
+
         switchLinks.forEach(link => {
             link.addEventListener('click', function(e) {
                 e.preventDefault();
-                signinForm.style.display = (signinForm.style.display === 'none') ? 'block' : 'none';
-                signupForm.style.display = (signupForm.style.display === 'none') ? 'block' : 'none';
+                const targetAnchor = e.target.getAttribute('href');
+                window.location.hash = targetAnchor;
             });
         });
     });

@@ -32,7 +32,7 @@
                 </li>
                 <li class="nav-item">
                     @guest    
-                        <a class="nav-link active" href="{{ route('IsslerBlog.authenticate') }}"><i class="bi bi-person-fill"></i> Sign In</a>
+                        <a class="nav-link active" href="{{ route('IsslerBlog.authenticate') }}#login"><i class="bi bi-person-fill"></i> Sign In</a>
                     @endguest
                     @auth
                         <li class="nav-item dropdown">

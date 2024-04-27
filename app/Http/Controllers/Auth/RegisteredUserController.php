@@ -23,12 +23,10 @@ class RegisteredUserController extends Controller
             return redirect()->back()->withInput()->withErrors($e->validator)->withFragment('register');
         }
 
-        dd('passou');
-
         $user = User::create([
-            'username' => $request->username,
-            'email' => $request->email,
-            'password' => Hash::make($request->password)
+            'username' => $request->username_register,
+            'email' => $request->email_register,
+            'password' => Hash::make($request->password_register)
         ]);
 
         $remember = $request->boolean('remember');

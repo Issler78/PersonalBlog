@@ -19,11 +19,12 @@ Route::post('/IsslerBlog/reset-password', [NewPasswordController::class, 'store'
 // Login
 Route::post('/IsslerBlog/auth', [AuthSessionController::class, 'auth'])->name('IsslerBlog.login');
 
+// Mail Code
+Route::get('/IsslerBlog/verify/email', [VerifyEmailController::class, 'index'])->name('IsslerBlog.verify.send');
+Route::post('/IsslerBlog/verify/email', [VerifyEmailController::class, 'verify'])->name('IsslerBlog.verify');
+Route::get('/IsslerBlog/verify/email/{resend}/resend', [VerifyEmailController::class, 'index'])->name('IsslerBlog.verify.resend');
+
 // Profile
 Route::middleware('auth')->group(function () {
     Route::post('/IsslerBlog/logout', [AuthSessionController::class, 'logout'])->name('IsslerBlog.logout');
-
-    Route::get('/IsslerBlog/verify/email', [VerifyEmailController::class, 'index'])->name('IsslerBlog.verify.send');
-    Route::post('/IsslerBlog/verify/email', [VerifyEmailController::class, 'verify'])->name('IsslerBlog.verify');
-    Route::get('/IsslerBlog/verify/email/{resend}/resend', [VerifyEmailController::class, 'index'])->name('IsslerBlog.verify.resend');
 });

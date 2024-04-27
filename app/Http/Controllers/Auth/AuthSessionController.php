@@ -11,8 +11,6 @@ class AuthSessionController extends Controller
 {
     public function auth(Request $request)
     {
-        
-
         try {
             $credentials = $request->validate([
                 'email' => 'required|email',

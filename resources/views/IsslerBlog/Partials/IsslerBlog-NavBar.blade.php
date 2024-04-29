@@ -1,10 +1,20 @@
 <style>
-.nav-item a{
+.nav-item a {
     display: inline-block;
 }
+
 .nav-item:not(.dropdown) a:hover {
     color: #fff;
     box-shadow: 0 2px #fff;
+}
+
+.nav-link.active.dropdown-toggle:hover {
+    color: #fff;
+    box-shadow: 0 2px #fff;
+}
+
+i {
+    margin-right: 5px;
 }
 </style>
 <nav class="navbar navbar-expand-xl sticky-top navbar-dark bg-dark border-bottom border-body" data-bs-theme="dark">
@@ -16,7 +26,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active" href="{{ route('IsslerBlog.index') }}"><i class="bi bi-house-fill"></i> Home</a>
+                    <a class="nav-link active" href="{{ route('IsslerBlog.index') }}"><i class="bi bi-house-fill"></i>Home</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('IsslerBlog.category', ['category' => 'F']) }}">Front-End</a>
@@ -35,17 +45,38 @@
                         <a class="nav-link active" href="{{ route('IsslerBlog.authenticate') }}#login"><i class="bi bi-person-fill"></i> Sign In</a>
                     @endguest
                     @auth
-                        <li class="nav-item dropdown">
-                            <a class="nav-link active dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-person-fill"></i> Profile</a>
+                        <li class="nav-item dropdown" id="profileDropdown">
+                            <a class="nav-link active dropdown-toggle" href="#" role="button" id="profileDropdownToggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-person-fill"></i>Profile</a>
 
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Edit User</a></li>
+                            <ul class="dropdown-menu" aria-labelledby="profileDropdownToggle">
+
+                                <li class="dropdown dropend">
+
+                                    <a class="dropdown-item dropdown-toggle" href="#" id="editUserDropdownToggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">Edit User</a>
+
+                                    <ul class="dropdown-menu dropdown-menu-end ms-2" aria-labelledby="editUserDropdownToggle">
+
+                                        <li><a class="dropdown-item" href="#">Change Username</a></li>
+
+                                        <li><a class="dropdown-item" href="#">Reset Password</a></li>
+                                        
+                                        <li><hr class="dropdown-divider"></li>
+                                        <form action="#" method="post">
+                                            @csrf
+                                            <li><button class="dropdown-item text-danger" type="submit">Delete User</button></li>
+                                        </form>
+                                    </ul>
+
+                                </li>
+
                                 <li><hr class="dropdown-divider"></li>
                                 <form action="{{ route('IsslerBlog.logout') }}" method="post">
                                     @csrf
-                                    <li><button class="dropdown-item" type="submit">Sign Out</button></li>
+                                    <li><button class="dropdown-item text-danger" type="submit">Sign Out</button></li>
                                 </form>
+
                             </ul>
+
                         </li>
                     @endauth
                 </li>
@@ -61,3 +92,18 @@
         </div>
     </div>
 </nav>
+<script>
+    // Evita que o dropdown interno feche quando clicado
+    document.getElementById('editUserDropdownToggle').addEventListener('click', function (e) {
+        e.stopPropagation();
+    });
+
+    // Fecha todos os dropdowns quando clicados fora
+    document.addEventListener('click', function (e) {
+        const profileDropdown = document.getElementById('profileDropdown');
+        const isOpen = profileDropdown.classList.contains('show');
+        if (isOpen && e.target.closest('#profileDropdown') === null) {
+            profileDropdown.classList.remove('show');
+        }
+    });
+</script>

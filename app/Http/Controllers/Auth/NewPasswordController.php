@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
@@ -36,6 +37,14 @@ class NewPasswordController extends Controller
         ]);
 
         DB::table('password_reset_tokens')->where('token', $request->token)->delete();
+
+        if (Auth::check())
+        {
+            Auth::logout();
+
+            $request->session()->invalidate();
+            $request->session()->regenerateToken();
+        }
 
         return redirect()->route('IsslerBlog.authenticate')->with('reset-password', 'Password Reset Successfuly!');
     }

@@ -42,7 +42,7 @@ i {
                 </li>
                 <li class="nav-item">
                     @guest    
-                        <a class="nav-link active" href="{{ route('IsslerBlog.authenticate') }}#login"><i class="bi bi-person-fill"></i> Sign In</a>
+                        <a class="nav-link active" href="{{ route('IsslerBlog.authenticate') }}#login"><i class="bi bi-person-fill"></i>Sign In</a>
                     @endguest
                     @auth
                         <li class="nav-item dropdown" id="profileDropdown">
@@ -58,7 +58,11 @@ i {
 
                                         <li><a class="dropdown-item" href="#">Change Username</a></li>
 
-                                        <li><a class="dropdown-item" href="#">Reset Password</a></li>
+                                        <form action="{{ route('IsslerBlog.password.email') }}" method="post">
+                                            @csrf
+                                            <input type="hidden" name="email" value="{{ auth()->user()->email }}">
+                                            <li><button class="dropdown-item" type="submit">Reset Password</button></li>
+                                        </form>
                                         
                                         <li><hr class="dropdown-divider"></li>
                                         <form action="#" method="post">

@@ -13,7 +13,7 @@
     box-shadow: 0 2px #fff;
 }
 
-i {
+li a i {
     margin-right: 5px;
 }
 </style>
@@ -56,7 +56,7 @@ i {
 
                                     <ul class="dropdown-menu dropdown-menu-end ms-2" aria-labelledby="editUserDropdownToggle">
 
-                                        <li><a class="dropdown-item" href="#">Change Username</a></li>
+                                        <li><a class="dropdown-item" href="{{ route('IsslerBlog.username') }}">Change Username</a></li>
 
                                         <form action="{{ route('IsslerBlog.password.email') }}" method="post">
                                             @csrf

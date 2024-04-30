@@ -28,6 +28,7 @@ Route::get('/IsslerBlog/verify/email/{resend}/resend', [VerifyEmailController::c
 // Profile
 Route::middleware('auth')->group(function () {
     Route::get('/IsslerBlog/edit/username', [EditUserController::class, 'changeUsername'])->name('IsslerBlog.username');
+    Route::post('/IsslerBlog/edit/username', [EditUserController::class, 'store'])->name('IsslerBlog.newUsername');
 
     Route::post('/IsslerBlog/logout', [AuthSessionController::class, 'logout'])->name('IsslerBlog.logout');
 });

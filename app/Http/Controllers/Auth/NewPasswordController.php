@@ -31,12 +31,16 @@ class NewPasswordController extends Controller
             abort(401, 'Unauthorized');
         }
 
+        
+
         $user = User::where('email', $passwordToken->email)->first();
         $user->update([
             "password" => Hash::make($request->password)
         ]);
 
         DB::table('password_reset_tokens')->where('token', $request->token)->delete();
+
+
 
         if (Auth::check())
         {

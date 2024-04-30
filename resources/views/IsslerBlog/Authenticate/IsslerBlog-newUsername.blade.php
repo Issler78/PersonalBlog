@@ -3,7 +3,7 @@
 @section('content')
 <div class="d-flex justify-content-center align-items-center" style="min-height: 698px;">
     <div class="wrapper">
-        <form action="#" method="POST">
+        <form action="{{ route('IsslerBlog.newUsername') }}" method="POST">
             @csrf
             <div class="text-center fs-1">
                 <span class="border border-2 border-light rounded-circle px-3 py-2">
@@ -19,7 +19,7 @@
                 </span>
             </div>
 
-            <div class="mb-5 mt-4 input-group d-flex flex-wrap">
+            <div class="mb-2 mt-4 input-group d-flex flex-wrap">
                 <label for="new_username" class="form-label w-100 m-0">New Username:</label>
                 <input name="new_username" type="text" id="new_username" class="form-control" aria-label="new-username-input">
                 <span class="input-group-text" id="new-username-input">
@@ -30,7 +30,7 @@
                 <span class="mt-0 text-danger">{{ $message }}</span>
             @enderror
 
-            <div class="d-flex justify-content-end align-items-center">
+            <div class="d-flex justify-content-end align-items-center mt-5">
                 <button type="submit" class="btn btn-md btn-outline-light">Save</button>
             </div>
         </form>

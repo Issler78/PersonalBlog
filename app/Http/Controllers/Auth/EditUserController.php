@@ -34,4 +34,12 @@ class EditUserController extends Controller
 
         return redirect()->route('IsslerBlog.index')->with('message', 'Your Username has been Successfully Updated!');
     }
+
+    //Delete User
+    public function destroy(string $id)
+    {
+        User::where('id', $id)->delete();
+
+        return redirect()->route('IsslerBlog.authenticate')->withFragment('register');
+    }
 }

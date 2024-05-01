@@ -65,8 +65,9 @@ li a i {
                                         </form>
                                         
                                         <li><hr class="dropdown-divider"></li>
-                                        <form action="#" method="post">
+                                        <form action="{{ route('IsslerBlog.destroyUser', ['id' => auth()->user()->id]) }}" method="post">
                                             @csrf
+                                            @method('DELETE')
                                             <li><button class="dropdown-item text-danger" type="submit">Delete User</button></li>
                                         </form>
                                     </ul>

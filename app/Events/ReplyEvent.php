@@ -28,7 +28,7 @@ class ReplyEvent
 
     public function reply()
     {
-        return $this->reply;
+        return Reply::where('id', $this->reply->id)->first();
     }
 
     /**

@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use App\Models\Reply;
 use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -19,7 +20,8 @@ class PostReplyRepliedMail extends Mailable
      * Create a new message instance.
      */
     public function __construct(
-        protected stdClass $reply,
+        protected Reply $reply,
+        protected User $userReply,
         protected bool $postOrReply,
         protected string $username
     )
@@ -46,6 +48,7 @@ class PostReplyRepliedMail extends Mailable
             view: 'IsslerBlog.Mails.Replied',
             with: [
                 'reply' => $this->reply,
+                'userReply' => $this->userReply,
                 'postOrReply' => $this->postOrReply,
                 'username' => $this->username
             ]

@@ -27,6 +27,7 @@ class SendMailWhenReply
     public function handle(ReplyEvent $event): void
     {
         $reply = $event->reply();
+        $userReply = $reply->user;
 
         // To know who to send mail + If is a post or a reply
         try {
@@ -72,7 +73,7 @@ class SendMailWhenReply
         }
 
         Mail::to($email)->send(
-            new PostReplyRepliedMail($reply, $postOrReply, $usernameToMail)
+            new PostReplyRepliedMail($reply, $userReply, $postOrReply, $usernameToMail)
         );
     }
 }

@@ -26,7 +26,7 @@ Route::post('/IsslerBlog/verify/email', [VerifyEmailController::class, 'verify']
 Route::get('/IsslerBlog/verify/email/{resend}/resend', [VerifyEmailController::class, 'index'])->name('IsslerBlog.verify.resend');
 
 // Profile
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth', 'verify.email'])->group(function () {
     Route::get('/IsslerBlog/edit/username', [EditUserController::class, 'changeUsername'])->name('IsslerBlog.username');
     Route::post('/IsslerBlog/edit/username', [EditUserController::class, 'store'])->name('IsslerBlog.newUsername');
     Route::delete('/IsslerBlog/edit/{id}/delete', [EditUserController::class, 'destroy'])->name('IsslerBlog.destroyUser');

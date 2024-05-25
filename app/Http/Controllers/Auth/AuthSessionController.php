@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
@@ -35,6 +36,16 @@ class AuthSessionController extends Controller
 
     public function logout(Request $request)
     {
+        try {
+            if ($user = $request->user())
+            {
+                $user->email_verified_at = null;
+                $user->save();
+            }
+        } catch (\Throwable $e) {
+            return response()->json(['error' => 'Error: ' . $e], 500);
+        }
+
         Auth::logout();
 
         $request->session()->invalidate();

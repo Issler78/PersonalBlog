@@ -24,7 +24,7 @@ Route::get('/IsslerBlog/authenticate', function () {
 })->name('IsslerBlog.authenticate');
 
 // Posts
-Route::middleware('auth.admin')->group(function () {
+Route::middleware(['auth.admin', 'verify.email'])->group(function () {
     Route::get('/IsslerBlog/publish', [PostController::class, 'create'])->name('IsslerBlog.publish');
     Route::post('/IsslerBlog/publish', [PostController::class, 'store'])->name('IsslerBlog.store');
     Route::get('/IsslerBlog/{id}/edit', [PostController::class, 'edit'])->name('IsslerBlog.edit');
@@ -37,7 +37,7 @@ Route::get('/IsslerBlog/post/{id}', [PostController::class, 'show'])->name('Issl
 Route::get('/IsslerBlog/{category}/category', [PostController::class, 'index'])->name('IsslerBlog.category');
 
 // Reply
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth', 'verify.email'])->group(function () {
     Route::post('/IsslerBlog/publish/reply', [ReplyController::class, 'store'])->name('IsslerBlog.reply.publish');
     Route::delete('/IsslerBlog/{id}/reply', [ReplyController::class, 'destroy'])->name('IsslerBlog.reply.destroy');
 });

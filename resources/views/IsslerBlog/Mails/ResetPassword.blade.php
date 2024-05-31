@@ -64,7 +64,7 @@
             <div class="col-md-8 p-0">
                 <p style="font-size: 26px;" class="text-center mt-5 mb-5">Reset your IsslerBlog password</p>
                 <div class="bg-white px-3 py-4">
-                    <p style="font-size: 14px;" class="text-wrap mb-5">We heard that you lost your IsslerBlog password. Sorry about that!</p>
+                    <p style="font-size: 14px;" class="text-wrap mb-4">We heard that you lost your IsslerBlog password. Sorry about that!</p>
                     <p style="font-size: 14px;" class="text-wrap mb-4">But don't worry! You can use the following button to reset your password:</p>
 
                     <div class="d-flex justify-content-center">
@@ -72,6 +72,11 @@
                             <button class="button-4" role="button">Reset Password</button>
                         </a>
                     </div>
+
+                    <p style="font-size: 14px;" class="text-wrap mt-3">
+                        If you don't use this link within 3 hours, it will expire. To get a new password reset link, visit: 
+                        <a href="https://ec6e-2804-d51-4fba-8200-709a-1f2f-fc94-5b6e.ngrok-free.app/IsslerBlog/forgot-password/request">/IsslerBlog/forgot-password/request</a>
+                    </p>
 
                     <p style="font-size: 14px;" class="mt-5">Thanks, IsslerBlog</p>
                 </div>

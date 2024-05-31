@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -31,6 +32,10 @@ class NewPasswordController extends Controller
             abort(401, 'Unauthorized');
         }
 
+        if ($passwordToken->expires_at < Carbon::now())
+        {
+            return redirect()->back()->with('invalid_link', 'Expired link');
+        }
         
 
         $user = User::where('email', $passwordToken->email)->first();

@@ -11,6 +11,13 @@
                 </span>
             </div>
             <h1 class="text-center mt-4">Reset Password</h1>
+
+            @if (session()->has('invalid_link'))
+                <div class="mt-4">
+                    <span class="text-danger">{{ session('invalid_link') }}</span>
+                </div>
+            @endif
+
             <input type="hidden" name="token" value="{{ $token }}">
             <div class="mb-2 mt-4 input-group d-flex flex-wrap">
                 <label for="email" class="form-label w-100 m-0">Email:</label>

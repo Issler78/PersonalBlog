@@ -23,11 +23,17 @@ class PasswordResetController extends Controller
             'email' => 'required|email|exists:users,email'
         ]);
         
+        if ($oldToken = DB::table('password_reset_tokens')->where('email', $request->email))
+        {
+            $oldToken->delete();
+        }
+
         $token = Str::random(40);
         DB::table('password_reset_tokens')->insert([
             'email' => $request->email,
             'token' => $token,
-            'created_at' => Carbon::now()
+            'created_at' => Carbon::now(),
+            'expires_at' => Carbon::now()->add('hour', 3)
         ]);
 
         Mail::to($request->email)->send(
